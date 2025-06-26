@@ -1,0 +1,1 @@
+export const SESSION_COOKIE: string = "AUTH_CURRENT_COOKIE";
