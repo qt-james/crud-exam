@@ -10,13 +10,14 @@ interface LoginData {
   token: string;
 }
 
-interface PostData {
+
+export interface PostData {
   postId: string;
   title: string;
   message: string;
   createdAt: string;
   updatedAt: string;
-  userId: string;
+  userId?: string;
 }
 
 interface PostMeta {
@@ -56,12 +57,4 @@ export interface CommonResponse {
 export interface PostFormDataType {
   title: string;
   message: string;
-}
-
-export interface GetPostDataType {
-  postId: string;
-  title: string;
-  message: string;
-  createdAt: string;
-  updatedAt: string;
-}
+} 

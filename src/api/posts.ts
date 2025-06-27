@@ -2,8 +2,8 @@ import { http } from "@/utils/axiosConfig";
 import {
   CommonResponse,
   PostFormDataType,
-  GetPostDataType,
   PostResponse,
+  PostData,
 } from "@/configs/types";
 
 export function addPost(formData: PostFormDataType): Promise<CommonResponse> {
@@ -21,7 +21,7 @@ export function getPosts(): Promise<PostResponse> {
   });
 }
 
-export function getPostById(postId: string): Promise<GetPostDataType> {
+export function getPostById(postId: string): Promise<PostData> {
   return http({
     method: "GET",
     endpoint: `/post/${postId}`,
