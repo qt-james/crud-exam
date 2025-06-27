@@ -21,7 +21,7 @@ export interface PostResponse {
   meta: PostMeta;
 }
 
-export interface PostFormDataType {
+export interface PostRequest {
   title: string;
   message: string;
 } 

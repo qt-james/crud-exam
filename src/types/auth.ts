@@ -14,12 +14,12 @@ export interface LoginResponse {
   data: LoginData;
 }
 
-export interface LoginFormDataType {
+export interface LoginRequest {
   email: string;
   password: string;
 }
 
-export interface SingupFormDataType {
+export interface SignupRequest {
   firstName: string;
   lastName: string;
   email: string;
