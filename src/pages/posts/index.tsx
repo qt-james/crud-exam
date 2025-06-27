@@ -1,7 +1,7 @@
 import React from "react";
 
 const index = () => {
-  return <div>Login</div>;
+  return <div>Posts</div>;
 };
 
 export default index;
