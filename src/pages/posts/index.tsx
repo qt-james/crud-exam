@@ -1,3 +1,9 @@
+import PrivateLayout from "@/components/layout/PrivateLayout";
+
 export default function Posts() {
-  return <div>Posts</div>;
+  return (
+    <PrivateLayout>
+      <div>Posts</div>
+    </PrivateLayout>
+  );
 }

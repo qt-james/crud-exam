@@ -18,3 +18,10 @@ export interface LoginFormDataType {
   email: string;
   password: string;
 }
+
+export interface SingupFormDataType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}

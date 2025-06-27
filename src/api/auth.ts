@@ -1,17 +1,16 @@
-import { http } from "@/utils/axiosConfig";
-import { LoginFormDataType, LoginResponse, SingupFormDataType, CommonResponse } from "@/configs/types";
+import { fetcher } from "@/utils/axiosConfig";
+import {
+  LoginFormDataType,
+  LoginResponse,
+  SingupFormDataType,
+} from "@/types/auth";
+import { CommonResponse } from "@/configs/types";
 
 export function authLogin(formData: LoginFormDataType): Promise<LoginResponse> {
-  return http<LoginResponse>({
-    method: "POST",
-    endpoint: "/auth/login",
-    formData,
-  });
+  return fetcher("GET", "/auth/login", formData);
 }
-export function authSignup(formData: SingupFormDataType): Promise<CommonResponse> {
-  return http<CommonResponse>({
-    method: "POST",
-    endpoint: "/auth/signup",
-    formData,
-  });
+export function authSignup(
+  formData: SingupFormDataType
+): Promise<CommonResponse> {
+  return fetcher("POST", "/auth/signup", formData);
 }

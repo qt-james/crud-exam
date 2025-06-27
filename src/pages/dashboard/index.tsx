@@ -1,3 +1,9 @@
+import PrivateLayout from "@/components/layout/PrivateLayout";
+
 export default function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <PrivateLayout>
+      <div>Dashboard</div>
+    </PrivateLayout>
+  );
 }
