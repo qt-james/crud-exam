@@ -1,5 +1,5 @@
 import React from "react";
-import Landing from "./modules/landing/Landing";
+import Landing from "../modules/landing/Landing";
 
 export default function Home() {
   return <Landing />;
