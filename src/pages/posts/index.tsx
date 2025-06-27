@@ -1,7 +1,7 @@
-import React from "react";
+import Posts from "../modules/posts/Posts";
 
-const index = () => {
-  return <div>Posts</div>;
-};
+function Index() {
+  return <Posts />;
+}
 
-export default index;
+export default Index;

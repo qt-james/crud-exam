@@ -1,7 +1,7 @@
-import React from "react";
+import Register from "../modules/register/Register";
 
-const index = () => {
-  return <div>Register</div>;
-};
+function Index() {
+  return <Register />;
+}
 
-export default index;
+export default Index;
