@@ -6,5 +6,5 @@ export function authLogin(formData: LoginRequest): Promise<LoginResponse> {
   return fetcher("POST", "/auth/login", formData);
 }
 export function authSignup(formData: SignupRequest): Promise<CommonResponse> {
-  return fetcher("POST", "/auth/signup", formData);
+  return fetcher("POST", "/user/signup", formData);
 }
