@@ -1,47 +1,26 @@
-import { http } from "@/utils/axiosConfig";
-import {
-  CommonResponse,
-  PostFormDataType,
-  PostResponse,
-  PostData,
-} from "@/configs/types";
+import { fetcher } from "@/utils/axiosConfig";
+import { PostRequest, PostResponse, PostData } from "@/types/posts";
+import { CommonResponse } from "@/configs/types";
 
-export function addPost(formData: PostFormDataType): Promise<CommonResponse> {
-  return http({
-    method: "POST",
-    endpoint: "/post",
-    formData,
-  });
+export function addPost(formData: PostRequest): Promise<CommonResponse> {
+  return fetcher("POST", "/post", formData);
 }
 
 export function getPosts(): Promise<PostResponse> {
-  return http({
-    method: "GET",
-    endpoint: "/post",
-  });
+  return fetcher("GET", "/post");
 }
 
 export function getPostById(postId: string): Promise<PostData> {
-  return http({
-    method: "GET",
-    endpoint: `/post/${postId}`,
-  });
+  return fetcher("GET", `/post/${postId}`);
 }
 
 export function editPost(
   postId: string,
-  formData: PostFormDataType
+  formData: PostRequest
 ): Promise<CommonResponse> {
-  return http({
-    method: "PUT",
-    endpoint: `/post/${postId}`,
-    formData,
-  });
+  return fetcher("PUT", `/post/${postId}`, formData);
 }
 
 export function deletePost(postId: string): Promise<CommonResponse> {
-  return http({
-    method: "DELETE",
-    endpoint: `/post/${postId}`,
-  });
+  return fetcher("DELETE", `/post/${postId}`);
 }

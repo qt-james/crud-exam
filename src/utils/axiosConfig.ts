@@ -1,66 +1,43 @@
-import axios, { AxiosInstance } from "axios";
-import { SESSION_COOKIE } from "@/configs/constants";
-import { API_URL } from "@/configs/environments";
+import axios, { AxiosRequestConfig, Method } from "axios";
 import cookies from "./cookies";
 
-interface HttpPropType {
-  method: "GET" | "POST" | "PUT" | "DELETE";
-  endpoint: string;
-  formData?: any;
-}
+const getAuthToken = () => {
+  return cookies.get("access_token");
+};
 
-const axiosRegistry: AxiosInstance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
+export const fetcher = async <D = never>(
+  method: Method,
+  url: string,
+  params?: object,
+  options?: AxiosRequestConfig
+): Promise<D> => {
+  const token = getAuthToken();
 
-axiosRegistry.interceptors.request.use(
-  (config) => {
-    const token = cookies.get(SESSION_COOKIE)?.value;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+  const config: AxiosRequestConfig = {
+    url,
+    method,
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+      ...(options?.headers || {}),
+    },
+    ...options,
+  };
 
-axiosRegistry.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 403) {
-      console.warn("Unauthorized. Redirecting to login...");
-    }
-    return Promise.reject(error);
-  }
-);
-
-export async function http<T>({
-  method,
-  endpoint,
-  formData,
-}: HttpPropType): Promise<T> {
-  let response;
-
-  switch (method) {
-    case "GET":
-      response = await axiosRegistry.get(endpoint);
-      break;
-    case "POST":
-      response = await axiosRegistry.post(endpoint, formData);
-      break;
-    case "PUT":
-      response = await axiosRegistry.put(endpoint, formData);
-      break;
-    case "DELETE":
-      response = await axiosRegistry.delete(endpoint);
-      break;
-    default:
-      throw new Error(`Unsupported HTTP method: ${method}`);
+  if (method.toUpperCase() === "GET") {
+    config.params = params;
+  } else {
+    config.data = params;
   }
 
-  return response.data;
-}
+  try {
+    const response = await axios.request<D>(config);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 403) {
+        console.error("Access denied: 403");
+      }
+    }
+    throw error;
+  }
+};
