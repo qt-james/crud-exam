@@ -1,7 +1,6 @@
 import React from "react";
+import Landing from "../modules/landing/Landing";
 
-const index = () => {
-  return <div>Login</div>;
-};
-
-export default index;
+export default function Home() {
+  return <Landing />;
+}

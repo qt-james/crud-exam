@@ -5,9 +5,6 @@ import { AUTH_COOKIE_NAME } from "../configs/constants";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
 });
 
@@ -20,10 +17,22 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      console.warn("Token expired or unauthorized.");
+      cookies.remove(AUTH_COOKIE_NAME);
+      return Promise.reject(error);
+    }
+    return Promise.reject(error);
+  }
+);
+
 export async function http(
   method: "GET" | "PUT" | "POST" | "DELETE",
   endpoint: string,
-  formData?: any
+  formData?: object
 ) {
   let response;
 
