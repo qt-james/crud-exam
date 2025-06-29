@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface AuthLayoutProps {
   children: ReactNode;

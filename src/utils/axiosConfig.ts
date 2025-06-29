@@ -1,25 +1,46 @@
-import axios, { AxiosRequestConfig, Method } from "axios";
+import axios, { AxiosRequestConfig, Method, AxiosInstance } from "axios";
+import { SESSION_COOKIE } from "@/configs/constants";
+import { API_URL } from "@/configs/environments";
 import cookies from "./cookies";
 
-const getAuthToken = () => {
-  return cookies.get("access_token");
-};
+const axiosConfig: AxiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 
-export const fetcher = async <D = never>(
+axiosConfig.interceptors.request.use(
+  (config) => {
+    const token = cookies.get(SESSION_COOKIE)?.value;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+axiosConfig.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 403) {
+      console.warn("Unauthorized. Redirecting to login...");
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const fetcher = <D = never>(
   method: Method,
   url: string,
   params?: object,
   options?: AxiosRequestConfig
-): Promise<D> => {
-  const token = getAuthToken();
-
+) => {
   const config: AxiosRequestConfig = {
     url,
     method,
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-      ...(options?.headers || {}),
-    },
     ...options,
   };
 
@@ -29,15 +50,5 @@ export const fetcher = async <D = never>(
     config.data = params;
   }
 
-  try {
-    const response = await axios.request<D>(config);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 403) {
-        console.error("Access denied: 403");
-      }
-    }
-    throw error;
-  }
+  return axiosConfig.request<D>(config).then((res) => res.data);
 };

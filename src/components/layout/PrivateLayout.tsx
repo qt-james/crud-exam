@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import HouseIcon from "@mui/icons-material/House";
@@ -18,9 +16,7 @@ import {
   ListItemText,
   ListItemButton,
   ListItemIcon,
-  Card,
 } from "@mui/material";
-import styles from "./Layout.module.scss";
 
 interface LayoutProps {
   children: ReactNode;
