@@ -8,10 +8,12 @@ interface LoginTextFieldProps {
   error?: string;
   onChange: (e: React.ChangeEvent<any>) => void;
   onBlur: (e: React.FocusEvent<any>) => void;
+  submitting: boolean;
 }
 
 export default function LoginTextField(props: LoginTextFieldProps) {
-  const { field, label, value, touched, error, onChange, onBlur } = props;
+  const { field, label, value, touched, error, onChange, onBlur, submitting } =
+    props;
 
   return (
     <Box sx={{ marginBottom: "10px" }}>
@@ -26,6 +28,7 @@ export default function LoginTextField(props: LoginTextFieldProps) {
         onBlur={onBlur}
         error={Boolean(touched && error)}
         helperText={touched && error}
+        disabled={submitting}
       />
     </Box>
   );

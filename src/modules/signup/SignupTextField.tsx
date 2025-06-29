@@ -8,10 +8,12 @@ interface SignupTextFieldProps {
   error?: string;
   onChange: (e: React.ChangeEvent<any>) => void;
   onBlur: (e: React.FocusEvent<any>) => void;
+  submitting: boolean;
 }
 
 export default function SignupTextField(props: SignupTextFieldProps) {
-  const { field, label, value, touched, error, onChange, onBlur } = props;
+  const { field, label, value, touched, error, onChange, onBlur, submitting } =
+    props;
 
   return (
     <Box sx={{ marginBottom: "10px" }}>
@@ -26,6 +28,7 @@ export default function SignupTextField(props: SignupTextFieldProps) {
         onBlur={onBlur}
         error={Boolean(touched && error)}
         helperText={touched && error}
+        disabled={submitting}
       />
     </Box>
   );
