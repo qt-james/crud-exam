@@ -1,7 +1,7 @@
 import React from "react";
 import {
   TableContainer,
-  Table,
+  Table as MuiTable,
   TableHead,
   TableRow,
   TableCell,
@@ -13,7 +13,7 @@ import {
 const TablePosts = () => {
   return (
     <TableContainer>
-      <Table>
+      <MuiTable>
         <TableHead>
           <TableRow>
             <TableCell>Title</TableCell>
@@ -32,7 +32,7 @@ const TablePosts = () => {
 
           {/* map posts in this TableRow */}
         </TableBody>
-      </Table>
+      </MuiTable>
     </TableContainer>
   );
 };
