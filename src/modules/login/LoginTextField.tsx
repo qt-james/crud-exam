@@ -1,0 +1,32 @@
+import { TextField, Box } from "@mui/material";
+
+interface LoginTextFieldProps {
+  field: string;
+  label: string;
+  value: string;
+  touched?: boolean;
+  error?: string;
+  onChange: (e: React.ChangeEvent<any>) => void;
+  onBlur: (e: React.FocusEvent<any>) => void;
+}
+
+export default function LoginTextField(props: LoginTextFieldProps) {
+  const { field, label, value, touched, error, onChange, onBlur } = props;
+
+  return (
+    <Box sx={{ marginBottom: "10px" }}>
+      <TextField
+        fullWidth
+        id={field}
+        name={field}
+        type={field === "password" ? "password" : "text"}
+        label={label}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        error={Boolean(touched && error)}
+        helperText={touched && error}
+      />
+    </Box>
+  );
+}
