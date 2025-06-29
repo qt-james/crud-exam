@@ -23,6 +23,7 @@ export default function LoginForm() {
           error={formik.errors.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <LoginTextField
@@ -33,14 +34,16 @@ export default function LoginForm() {
           error={formik.errors.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <Button
           variant="contained"
           type="submit"
           disabled={formik.isSubmitting}
+          loading={formik.isSubmitting}
         >
-          {formik.isSubmitting ? "Logging in..." : "Login"}
+          Login
         </Button>
       </form>
     </AuthCard>

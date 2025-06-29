@@ -23,6 +23,7 @@ export default function SignupForm() {
           error={formik.errors.firstName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <SignupTextField
@@ -33,6 +34,7 @@ export default function SignupForm() {
           error={formik.errors.lastName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <SignupTextField
@@ -43,6 +45,7 @@ export default function SignupForm() {
           error={formik.errors.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <SignupTextField
@@ -53,14 +56,16 @@ export default function SignupForm() {
           error={formik.errors.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          submitting={formik.isSubmitting}
         />
 
         <Button
           variant="contained"
           type="submit"
           disabled={formik.isSubmitting}
+          loading={formik.isSubmitting}
         >
-          {formik.isSubmitting ? "Signning up..." : "Signup"}
+          Signup
         </Button>
       </form>
     </AuthCard>
