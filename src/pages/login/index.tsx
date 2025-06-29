@@ -1,12 +1,10 @@
-import AuthCard from "@/components/auth/AuthCard";
-import PublicLayout from "@/components/layout/PublicLayout";
+import LoginComponent from "@/modules/login/Login";
+import SessionRoute from "@/components/SessionRoute";
 
 export default function Login() {
   return (
-    <PublicLayout>
-      <AuthCard title="Login" subtitle="Please put in your credentials!">
-        <div>Login</div>
-      </AuthCard>
-    </PublicLayout>
+    <SessionRoute>
+      <LoginComponent />
+    </SessionRoute>
   );
 }

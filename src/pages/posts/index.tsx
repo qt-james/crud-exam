@@ -1,9 +1,9 @@
-import PrivateLayout from "@/components/layout/PrivateLayout";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function Posts() {
   return (
-    <PrivateLayout>
+    <ProtectedRoute>
       <div>Posts</div>
-    </PrivateLayout>
+    </ProtectedRoute>
   );
 }

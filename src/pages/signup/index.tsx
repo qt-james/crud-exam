@@ -1,15 +1,10 @@
-import AuthCard from "@/components/auth/AuthCard";
-import PublicLayout from "@/components/layout/PublicLayout";
+import SessionRoute from "@/components/SessionRoute";
+import SignupComponent from "@/modules/signup/Signup";
 
 export default function Signup() {
   return (
-    <PublicLayout>
-      <AuthCard
-        title="Signup"
-        subtitle="Fill up all of the necessary field to register!"
-      >
-        <div>Signup</div>
-      </AuthCard>
-    </PublicLayout>
+    <SessionRoute>
+      <SignupComponent />
+    </SessionRoute>
   );
 }

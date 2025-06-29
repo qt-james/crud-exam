@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.scss";
-import ActionBtn from "@/components/buttons/ActionBtn";
-import CancelBtn from "@/components/buttons/CancelBtn";
-import SubmitBtn from "@/components/buttons/SubmitBtn";
+
 
 export default function Home() {
   return (
@@ -15,11 +13,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       This is Home
-      <ActionBtn isEdit={true} />
-      <ActionBtn isDelete={true} />
-      <ActionBtn />
-      <CancelBtn title="Cancel" />
-      <SubmitBtn title="ADD POST" />
     </>
   );
 }

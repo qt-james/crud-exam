@@ -4,6 +4,7 @@ import HouseIcon from "@mui/icons-material/House";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useAuth } from "@/context/AuthProvider";
 import {
   AppBar,
   Toolbar,
@@ -25,6 +26,7 @@ interface LayoutProps {
 const drawerWidth = 230;
 
 export default function PrivateLayout({ children }: LayoutProps) {
+  const { logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
@@ -108,6 +110,7 @@ export default function PrivateLayout({ children }: LayoutProps) {
               marginBottom: "20px",
             }}
             startIcon={<LogoutIcon />}
+            onClick={logout}
           >
             Logout
           </Button>
