@@ -1,6 +1,6 @@
 import { fetcher } from "@/utils/axiosConfig";
 import { PostRequest, PostResponse, PostData } from "@/types/posts";
-import { CommonResponse } from "@/configs/types";
+import { CommonResponse } from "@/types/global";
 
 export function addPost(formData: PostRequest): Promise<CommonResponse> {
   return fetcher("POST", "/post", formData);
