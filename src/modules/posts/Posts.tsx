@@ -8,7 +8,9 @@ export default function Posts() {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: 2 }}>
-      <Button variant="contained" onClick={modalFunc.toggleAddModalOpen}>
+      <Button sx={{
+        fontWeight: 700
+      }} variant="contained" onClick={modalFunc.toggleAddModalOpen}>
         Add Post
       </Button>
       <PostAddModal {...modalFunc} />
