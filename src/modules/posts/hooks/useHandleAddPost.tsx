@@ -5,7 +5,9 @@ import { useState } from "react";
 
 export default function useHandleAddPost() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const toggleAddModalOpen = () => setIsAddModalOpen(!isAddModalOpen);
+  const toggleAddModalOpen = () => {
+    setIsAddModalOpen(!isAddModalOpen);
+  };
 
   const formik = useFormik<PostRequest>({
     initialValues: {

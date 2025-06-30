@@ -10,7 +10,7 @@ interface PostsType {
 
 interface PostTableProps {
   openEditModal: () => void;
-  postToEdit: (post: PostRequest) => void;
+  setPostToEdit: (post: PostRequest) => void;
 }
 
 const posts = [
@@ -59,7 +59,7 @@ const posts = [
 const headerTitles = ["Title", "Message", "Data", "Actions"];
 
 export default function PostsTable(props: PostTableProps) {
-  const { openEditModal, postToEdit } = props;
+  const { openEditModal, setPostToEdit } = props;
 
   return (
     <TableContainer component={Paper}>
@@ -68,7 +68,7 @@ export default function PostsTable(props: PostTableProps) {
         <PostsTableBody
           posts={posts}
           openEditModal={openEditModal}
-          postToEdit={postToEdit}
+          setPostToEdit={setPostToEdit}
         />
       </Table>
     </TableContainer>
