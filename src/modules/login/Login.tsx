@@ -62,9 +62,9 @@ const Login = () => {
           <Box sx={{ mt: 2, textAlign: "center" }}>
             <Typography variant="subtitle1">
               Don&apos;t have an account?{" "}
-              <Link href="/register">
-                <MuiLink underline="hover">Register</MuiLink>
-              </Link>
+              <MuiLink underline="hover" href="/register">
+                Register
+              </MuiLink>
             </Typography>
           </Box>
         </CardContent>

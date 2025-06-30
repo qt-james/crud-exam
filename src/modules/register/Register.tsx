@@ -109,9 +109,9 @@ const Register = () => {
           <Box sx={{ mt: 2, textAlign: "center" }}>
             <Typography variant="subtitle1">
               Already have an account?{" "}
-              <Link href="/">
-                <MuiLink underline="hover">Login</MuiLink>
-              </Link>
+              <MuiLink href="/" underline="hover">
+                Login
+              </MuiLink>
             </Typography>
           </Box>
         </CardContent>

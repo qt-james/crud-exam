@@ -20,6 +20,8 @@ const validationSchema = yup.object({
     .string()
     .required("Confirm your password")
     .oneOf([yup.ref("password")], "Passwords must match"),
+  firstName: yup.string().required("First Name is required"),
+  lastName: yup.string().required("Last Name is required"),
 });
 
 const useRegister = () => {
