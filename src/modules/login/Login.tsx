@@ -9,7 +9,6 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import useLogin from "./useLogin";
-import Link from "next/link";
 
 const Login = () => {
   const formik = useLogin();

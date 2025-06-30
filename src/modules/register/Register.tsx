@@ -9,7 +9,6 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import useRegister from "./useRegister";
-import Link from "next/link";
 
 const Register = () => {
   const formik = useRegister();
