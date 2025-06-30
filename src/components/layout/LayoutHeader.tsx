@@ -1,6 +1,5 @@
 import { AppBar, Toolbar, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import useLayout from "./useLayout";
 
 interface LayoutHeaderProps {
   drawerOpen: boolean;
