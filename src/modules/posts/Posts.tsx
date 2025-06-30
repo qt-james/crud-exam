@@ -7,7 +7,7 @@ import useHandleEditPost from "./hooks/useHandleEditPost";
 
 export default function Posts() {
   const { addModalItems } = useHandleAddPost();
-  const { editModalItems, handleEdit } = useHandleEditPost();
+  const { editModalItems, setPostToEdit } = useHandleEditPost();
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -32,7 +32,7 @@ export default function Posts() {
       <PostEditModal {...editModalItems} />
       <PostsTable
         openEditModal={editModalItems.toggleEditModalOpen}
-        postToEdit={handleEdit}
+        setPostToEdit={setPostToEdit}
       />
     </Container>
   );

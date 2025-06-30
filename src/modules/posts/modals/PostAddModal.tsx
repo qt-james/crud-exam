@@ -16,7 +16,10 @@ export default function PostAddModal(props: PostAddModalProps) {
     <>
       <ModalContainer
         isOpen={isAddModalOpen}
-        toggleOpen={toggleAddModalOpen}
+        toggleOpen={() => {
+          toggleAddModalOpen();
+          formik.resetForm();
+        }}
         title={"Add Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -48,7 +51,10 @@ export default function PostAddModal(props: PostAddModalProps) {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={toggleAddModalOpen}
+              onClick={() => {
+                toggleAddModalOpen();
+                formik.resetForm();
+              }}
             >
               Cancel
             </Button>

@@ -1,22 +1,24 @@
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
-import useHandleEditPost from "../hooks/useHandleEditPost";
 
 interface PostEditModalProps {
   toggleEditModalOpen: () => void;
   isEditModalOpen: boolean;
+  formik: any;
 }
 
 export default function PostEditModal(props: PostEditModalProps) {
-  const { formik } = useHandleEditPost();
-  const { toggleEditModalOpen, isEditModalOpen } = props;
+  const { toggleEditModalOpen, isEditModalOpen, formik } = props;
 
   return (
     <>
       <ModalContainer
         isOpen={isEditModalOpen}
-        toggleOpen={toggleEditModalOpen}
+        toggleOpen={() => {
+          toggleEditModalOpen();
+          formik.resetForm();
+        }}
         title={"Edit Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -48,7 +50,10 @@ export default function PostEditModal(props: PostEditModalProps) {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={toggleEditModalOpen}
+              onClick={() => {
+                toggleEditModalOpen();
+                formik.resetForm();
+              }}
             >
               Cancel
             </Button>

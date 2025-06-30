@@ -9,15 +9,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { PostData, PostRequest } from "@/types/posts";
+import useHandleEditPost from "./hooks/useHandleEditPost";
 
 interface PostsTableProps {
   posts: PostData[];
-  postToEdit: (post: PostRequest) => void; 
+  setPostToEdit: (post: PostRequest) => void;
   openEditModal: () => void;
 }
 
 export default function PostsTableBody(props: PostsTableProps) {
-  const { posts, openEditModal, postToEdit } = props;
+  const { posts, openEditModal, setPostToEdit } = props;
 
   return (
     <TableBody>
@@ -40,8 +41,8 @@ export default function PostsTableBody(props: PostsTableProps) {
                 </IconButton>
                 <IconButton
                   onClick={() => {
+                    setPostToEdit({ title: item.title, message: item.message });
                     openEditModal();
-                    postToEdit({ title: item.title, message: item.message });
                   }}
                 >
                   <EditIcon sx={{ fill: "green" }} />

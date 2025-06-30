@@ -1,7 +1,7 @@
 import { useFormik, FormikHelpers } from "formik";
 import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function useHandleEditPost() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -28,16 +28,13 @@ export default function useHandleEditPost() {
     },
   });
 
-  const handleEdit = (data: PostRequest) => {
-    setPostToEdit(data);
-  };
-
   return {
     formik,
     editModalItems: {
       isEditModalOpen,
       toggleEditModalOpen,
+      formik,
     },
-    handleEdit,
+    setPostToEdit,
   };
 }
