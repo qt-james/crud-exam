@@ -2,15 +2,17 @@ import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
 import useHandleAddPost from "../hooks/useHandleAddPost";
+import { FormikProps } from "formik";
+import { PostRequest } from "@/types/posts";
 
 interface PostAddModalProps {
   toggleAddModalOpen: () => void;
   isAddModalOpen: boolean;
+  formik: FormikProps<PostRequest>;
 }
 
 export default function PostAddModal(props: PostAddModalProps) {
-  const { formik } = useHandleAddPost();
-  const { toggleAddModalOpen, isAddModalOpen } = props;
+  const { toggleAddModalOpen, isAddModalOpen, formik } = props;
 
   return (
     <>

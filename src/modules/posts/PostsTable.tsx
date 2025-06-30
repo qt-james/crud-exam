@@ -10,6 +10,7 @@ interface PostsType {
 
 interface PostTableProps {
   openEditModal: () => void;
+  openDeleteModal: () => void;
   setPostToEdit: (post: PostRequest) => void;
 }
 
@@ -59,7 +60,7 @@ const posts = [
 const headerTitles = ["Title", "Message", "Data", "Actions"];
 
 export default function PostsTable(props: PostTableProps) {
-  const { openEditModal, setPostToEdit } = props;
+  const { openEditModal, setPostToEdit, openDeleteModal } = props;
 
   return (
     <TableContainer component={Paper}>
@@ -69,6 +70,7 @@ export default function PostsTable(props: PostTableProps) {
           posts={posts}
           openEditModal={openEditModal}
           setPostToEdit={setPostToEdit}
+          openDeleteModal={openDeleteModal}
         />
       </Table>
     </TableContainer>

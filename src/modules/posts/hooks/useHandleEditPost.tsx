@@ -29,7 +29,6 @@ export default function useHandleEditPost() {
   });
 
   return {
-    formik,
     editModalItems: {
       isEditModalOpen,
       toggleEditModalOpen,
