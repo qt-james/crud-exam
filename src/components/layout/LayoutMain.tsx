@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Box } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 import LayoutSidebar from "./LayoutSidebar";
 import LayoutHeader from "./LayoutHeader";
 import useLayout from "./useLayout";
@@ -17,13 +17,21 @@ export default function PublicLayout(props: AuthLayoutProps) {
   return (
     <Box
       component={"main"}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        px: 2,
-      }}
+      sx={
+        !isAuth
+          ? {
+              minHeight: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              px: 2,
+            }
+          : {
+              width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
+              ml: drawerOpen ? `${drawerWidth}px` : 0,
+              transition: "all 0.3s ease",
+            }
+      }
     >
       {isAuth && (
         <>
@@ -40,6 +48,7 @@ export default function PublicLayout(props: AuthLayoutProps) {
           />
         </>
       )}
+      <Toolbar />
       {children}
     </Box>
   );
