@@ -26,7 +26,11 @@ export default function PublicLayout(props: AuthLayoutProps) {
               justifyContent: "center",
               px: 2,
             }
-          : {}
+          : {
+              width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
+              ml: drawerOpen ? `${drawerWidth}px` : 0,
+              transition: "all 0.3s ease",
+            }
       }
     >
       {isAuth && (
@@ -45,7 +49,7 @@ export default function PublicLayout(props: AuthLayoutProps) {
         </>
       )}
       <Toolbar />
-      <Box>{children}</Box>
+      {children}
     </Box>
   );
 }

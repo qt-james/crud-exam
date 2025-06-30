@@ -25,16 +25,22 @@ export default function PostsTableBody(props: PostsTableProps) {
             <TableCell>{item.title}</TableCell>
             <TableCell>{item.message}</TableCell>
             <TableCell>{item.createdAt}</TableCell>
-            <TableCell>
+            <TableCell
+              sx={{
+                width: "1%",
+                whiteSpace: "nowrap",
+                textAlign: "center",
+              }}
+            >
               <Stack direction={"row"}>
                 <IconButton>
-                  <DeleteIcon sx={{ fill: "red" }}/>
+                  <DeleteIcon sx={{ fill: "red" }} />
                 </IconButton>
                 <IconButton>
-                  <EditIcon sx={{ fill: "green" }}/>
+                  <EditIcon sx={{ fill: "green" }} />
                 </IconButton>
                 <IconButton>
-                  <VisibilityIcon sx={{ fill: "orange" }}/>
+                  <VisibilityIcon sx={{ fill: "orange" }} />
                 </IconButton>
               </Stack>
             </TableCell>
