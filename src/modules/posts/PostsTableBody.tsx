@@ -34,13 +34,13 @@ export default function PostsTableBody(props: PostsTableProps) {
             >
               <Stack direction={"row"}>
                 <IconButton>
-                  <DeleteIcon sx={{ fill: "red" }} />
+                  <VisibilityIcon sx={{ fill: "orange" }} />
                 </IconButton>
                 <IconButton>
                   <EditIcon sx={{ fill: "green" }} />
                 </IconButton>
                 <IconButton>
-                  <VisibilityIcon sx={{ fill: "orange" }} />
+                  <DeleteIcon sx={{ fill: "red" }} />
                 </IconButton>
               </Stack>
             </TableCell>
