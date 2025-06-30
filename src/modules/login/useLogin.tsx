@@ -1,4 +1,3 @@
-import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
