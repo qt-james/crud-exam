@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, ReactNode } from "react";
+import React, { useState, createContext, ReactNode } from "react";
 import cookies from "@/utils/cookies";
 import { AUTH_COOKIE_NAME } from "@/configs/constants";
 import { authLogin, authSignup } from "@/api/auth";
