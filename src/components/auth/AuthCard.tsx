@@ -48,7 +48,10 @@ export default function AuthCard(props: AuthCardProps) {
           textAlign="center"
         >
           {authNav}{" "}
-          <Link onClick={() => router.push(`/${authNavTitle}`)}>
+          <Link
+            onClick={() => router.push(`/${authNavTitle}`)}
+            sx={{ cursor: "pointer" }}
+          >
             {authNavTitle}
           </Link>
         </Typography>

@@ -9,7 +9,7 @@ interface PropType {
 const publicRoutes: string[] = ["/login", "/signup"];
 const privateRoutes: string[] = ["/dashboard", "/posts"];
 
-export default function ProtectedRoute({ children }: PropType) {
+export default function RouteLayout({ children }: PropType) {
   const { isAuth } = useAuth();
   const router = useRouter();
   const pathname = router.pathname;
