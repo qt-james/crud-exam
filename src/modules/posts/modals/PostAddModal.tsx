@@ -4,7 +4,7 @@ import { useState } from "react";
 import ModalTextField from "./ModalTextField";
 import useHandleAddPost from "../hooks/useHandleAddPost";
 
-export default function addModal() {
+export default function PostAddModal() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const formik = useHandleAddPost();
@@ -40,7 +40,18 @@ export default function addModal() {
             onBlur={formik.handleBlur}
             submitting={formik.isSubmitting}
           />
-          <Stack spacing={1} direction="row">
+          <Stack
+            spacing={1}
+            direction="row"
+            sx={{ justifyContent: "flex-end" }}
+          >
+            <Button
+              variant="outlined"
+              disabled={formik.isSubmitting}
+              onClick={toggleOpen}
+            >
+              Cancel
+            </Button>
             <Button
               variant="contained"
               type="submit"
@@ -48,13 +59,6 @@ export default function addModal() {
               loading={formik.isSubmitting}
             >
               Add Post
-            </Button>
-            <Button
-              variant="outlined"
-              disabled={formik.isSubmitting}
-              onClick={toggleOpen}
-            >
-              Cancel
             </Button>
           </Stack>
         </form>

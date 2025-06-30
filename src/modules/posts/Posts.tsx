@@ -1,5 +1,5 @@
-import AddModal from "./modals/addModal";
+import PostAddModal from "./modals/PostAddModal";
 
 export default function Posts() {
-  return <AddModal />;
+  return <PostAddModal />;
 }
