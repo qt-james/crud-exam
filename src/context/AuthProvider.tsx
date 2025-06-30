@@ -32,8 +32,6 @@ export function AuthProvider(props: AuthContextProps) {
       const response = await authLogin(formData);
       cookies.set(SESSION_COOKIE, response.data.token);
       setIsAuth(true);
-
-      router.push("/dashboard");
     } catch (error) {
       console.log(error);
     }

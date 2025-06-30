@@ -6,8 +6,8 @@ interface LoginTextFieldProps {
   value: string;
   touched?: boolean;
   error?: string;
-  onChange: (e: React.ChangeEvent<any>) => void;
-  onBlur: (e: React.FocusEvent<any>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   submitting: boolean;
 }
 
