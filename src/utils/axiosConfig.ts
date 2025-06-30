@@ -38,19 +38,19 @@ export async function http(
 
   switch (method) {
     case "GET":
-      response = await axios.get(`${API_URL}${endpoint}`);
+      response = await axiosInstance.get(endpoint);
       break;
 
     case "POST":
-      response = await axios.post(`${API_URL}${endpoint}`, formData);
+      response = await axiosInstance.post(endpoint, formData);
       break;
 
     case "PUT":
-      response = await axios.put(`${API_URL}${endpoint}`, formData);
+      response = await axiosInstance.put(endpoint, formData);
       break;
 
     case "DELETE":
-      response = await axios.delete(`${API_URL}${endpoint}`);
+      response = await axiosInstance.delete(endpoint);
       break;
   }
 
