@@ -1,6 +1,6 @@
 import React from "react";
-import Landing from "../modules/landing/Landing";
+import Login from "../modules/login/Login";
 
 export default function Home() {
-  return <Landing />;
+  return <Login />;
 }
