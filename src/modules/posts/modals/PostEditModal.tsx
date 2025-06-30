@@ -5,7 +5,7 @@ import { FormikProps } from "formik";
 import { PostRequest } from "@/types/posts";
 
 interface PostEditModalProps {
-  toggleEditModalOpen: () => void;
+  toggleEditModalOpen: (id: string, item: PostRequest) => void;
   isEditModalOpen: boolean;
   formik: FormikProps<PostRequest>;
 }
@@ -13,14 +13,16 @@ interface PostEditModalProps {
 export default function PostEditModal(props: PostEditModalProps) {
   const { toggleEditModalOpen, isEditModalOpen, formik } = props;
 
+  function openEditModal() {
+    toggleEditModalOpen("", { title: "", message: "" });
+    formik.resetForm();
+  }
+
   return (
     <>
       <ModalContainer
         isOpen={isEditModalOpen}
-        toggleOpen={() => {
-          toggleEditModalOpen();
-          formik.resetForm();
-        }}
+        toggleOpen={openEditModal}
         title={"Edit Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -52,10 +54,7 @@ export default function PostEditModal(props: PostEditModalProps) {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={() => {
-                toggleEditModalOpen();
-                formik.resetForm();
-              }}
+              onClick={openEditModal}
             >
               Cancel
             </Button>

@@ -11,13 +11,9 @@ import { useEffect, useState } from "react";
 
 export default function Posts() {
   const { fetchAllPost, posts, isLoading } = useHandleFetchPost();
-  const { addModalItems } = useHandleAddPost(() => fetchAllPost());
-  const { editModalItems, setPostToEdit } = useHandleEditPost();
-  const { deleteModalItems } = useHandleDeletePost();
-
-  useEffect(() => {
-    fetchAllPost();
-  }, []);
+  const addModalItems = useHandleAddPost(fetchAllPost);
+  const editModalItems = useHandleEditPost(fetchAllPost);
+  const deleteModalItems = useHandleDeletePost(fetchAllPost);
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -42,10 +38,10 @@ export default function Posts() {
       <PostEditModal {...editModalItems} />
       <PostDeleteModal {...deleteModalItems} />
       <PostsTable
+        isLoading={isLoading}
         posts={posts}
         openEditModal={editModalItems.toggleEditModalOpen}
         openDeleteModal={deleteModalItems.toggleDeleteModalOpen}
-        setPostToEdit={setPostToEdit}
       />
     </Container>
   );

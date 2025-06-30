@@ -1,39 +1,48 @@
 import { useFormik, FormikHelpers } from "formik";
 import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { editPost } from "@/api/posts";
 
-export default function useHandleEditPost() {
+export default function useHandleEditPost(fetchPost: () => Promise<void>) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const toggleEditModalOpen = () => setIsEditModalOpen(!isEditModalOpen);
+  const [postId, setPostId] = useState("");
   const [postToEdit, setPostToEdit] = useState<PostRequest>({
     title: "",
     message: "",
   });
+  const toggleEditModalOpen = (id: string, item: PostRequest) => {
+    setIsEditModalOpen(!isEditModalOpen);
+    setPostToEdit(item);
+    setPostId(id);
+  };
 
   const formik = useFormik<PostRequest>({
     initialValues: postToEdit,
     enableReinitialize: true,
     validationSchema: FormSchema,
-    onSubmit: async (
-      values,
-      { setSubmitting, resetForm }: FormikHelpers<PostRequest>
-    ) => {
-      setSubmitting(true);
-      console.log(values);
-      setTimeout(() => {
-        setSubmitting(false);
-      }, 1000);
-      resetForm();
-    },
+    onSubmit: onEditSubmit,
   });
 
+  async function onEditSubmit(
+    values: PostRequest,
+    { setSubmitting, resetForm }: FormikHelpers<PostRequest>
+  ) {
+    try {
+      await editPost(postId, values);
+      resetForm();
+      setIsEditModalOpen(false);
+      fetchPost();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return {
-    editModalItems: {
-      isEditModalOpen,
-      toggleEditModalOpen,
-      formik,
-    },
-    setPostToEdit,
+    isEditModalOpen,
+    toggleEditModalOpen,
+    formik,
   };
 }

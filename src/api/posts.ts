@@ -6,8 +6,11 @@ export function addPost(formData: PostRequest): Promise<CommonResponse> {
   return fetcher("POST", "/post", formData);
 }
 
-export function getPosts(): Promise<PostResponse> {
-  return fetcher("GET", "/post?limit=5&order=DESC");
+export function getPosts(params: {
+  limit: string;
+  order: string;
+}): Promise<PostResponse> {
+  return fetcher("GET", "/post", params);
 }
 
 export function getPostById(postId: string): Promise<PostData> {

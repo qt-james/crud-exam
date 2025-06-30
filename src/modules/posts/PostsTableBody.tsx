@@ -4,6 +4,8 @@ import {
   TableCell,
   Stack,
   IconButton,
+  Box,
+  Skeleton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,18 +14,28 @@ import { PostData, PostRequest } from "@/types/posts";
 
 interface PostsTableProps {
   posts: PostData[];
-  setPostToEdit: (post: PostRequest) => void;
-  openEditModal: () => void;
-  openDeleteModal: () => void;
+  openEditModal: (id: string, item: PostRequest) => void;
+  openDeleteModal: (id: string) => void;
+  isLoading: boolean;
 }
 
 export default function PostsTableBody(props: PostsTableProps) {
-  const { posts, openEditModal, setPostToEdit, openDeleteModal } = props;
+  const { posts, openEditModal, openDeleteModal, isLoading } = props;
 
   return (
     <TableBody>
-      {posts.map((item: PostData, index: number) => {
-        return (
+      {isLoading ? (
+        <TableRow>
+          <TableCell colSpan={4}>
+            <Box sx={{ width: "100%" }}>
+              <Skeleton height={40} />
+              <Skeleton height={40} animation="wave" />
+              <Skeleton height={40} animation={false} />
+            </Box>
+          </TableCell>
+        </TableRow>
+      ) : (
+        posts.map((item: PostData, index: number) => (
           <TableRow key={index}>
             <TableCell>{item.title}</TableCell>
             <TableCell>{item.message}</TableCell>
@@ -35,21 +47,23 @@ export default function PostsTableBody(props: PostsTableProps) {
                 textAlign: "center",
               }}
             >
-              <Stack direction={"row"}>
+              <Stack direction="row" spacing={1}>
                 <IconButton>
                   <VisibilityIcon sx={{ fill: "orange" }} />
                 </IconButton>
                 <IconButton
                   onClick={() => {
-                    setPostToEdit({ title: item.title, message: item.message });
-                    openEditModal();
+                    openEditModal(item.postId, {
+                      title: item.title,
+                      message: item.message,
+                    });
                   }}
                 >
                   <EditIcon sx={{ fill: "green" }} />
                 </IconButton>
                 <IconButton
                   onClick={() => {
-                    openDeleteModal();
+                    openDeleteModal(item.postId);
                   }}
                 >
                   <DeleteIcon sx={{ fill: "red" }} />
@@ -57,8 +71,8 @@ export default function PostsTableBody(props: PostsTableProps) {
               </Stack>
             </TableCell>
           </TableRow>
-        );
-      })}
+        ))
+      )}
     </TableBody>
   );
 }

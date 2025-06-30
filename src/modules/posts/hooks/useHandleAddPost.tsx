@@ -16,28 +16,28 @@ export default function useHandleAddPost(fetchPost: () => Promise<void>) {
       message: "",
     },
     validationSchema: FormSchema,
-    onSubmit: async (
-      values: PostRequest,
-      { setSubmitting, resetForm }: FormikHelpers<PostRequest>
-    ) => {
-      try {
-        await addPost(values);
-        resetForm();
-        setIsAddModalOpen(false);
-        fetchPost();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setSubmitting(false);
-      }
-    },
+    onSubmit: onAddSubmit,
   });
 
+  async function onAddSubmit(
+    values: PostRequest,
+    { setSubmitting, resetForm }: FormikHelpers<PostRequest>
+  ) {
+    try {
+      await addPost(values);
+      resetForm();
+      setIsAddModalOpen(false);
+      fetchPost();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return {
-    addModalItems: {
-      isAddModalOpen,
-      toggleAddModalOpen,
-      formik,
-    },
+    isAddModalOpen,
+    toggleAddModalOpen,
+    formik,
   };
 }

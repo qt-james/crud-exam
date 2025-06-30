@@ -6,24 +6,24 @@ import { PostData, PostRequest } from "@/types/posts";
 
 interface PostTableProps {
   posts: PostData[];
-  openEditModal: () => void;
+  openEditModal: (id: string, item: PostRequest) => void;
   openDeleteModal: () => void;
-  setPostToEdit: (post: PostRequest) => void;
+  isLoading: boolean;
 }
 
 const headerTitles = ["Title", "Message", "Data", "Actions"];
 
 export default function PostsTable(props: PostTableProps) {
-  const { openEditModal, setPostToEdit, openDeleteModal, posts } = props;
+  const { openEditModal, openDeleteModal, posts, isLoading } = props;
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <PostsTableHeader headerTitle={headerTitles} />
         <PostsTableBody
+          isLoading={isLoading}
           posts={posts}
           openEditModal={openEditModal}
-          setPostToEdit={setPostToEdit}
           openDeleteModal={openDeleteModal}
         />
       </Table>
