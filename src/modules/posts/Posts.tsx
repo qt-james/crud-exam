@@ -1,13 +1,20 @@
-import React from "react";
-import { useContext } from "react";
-import AuthProvider, { AuthContext } from "@/context/AuthProvider";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { Button, Box, Typography } from "@mui/material";
 import RequireAuth from "@/components/auth/RequireAuth";
+import { AuthContext } from "@/context/AuthProvider";
 
 const Posts = () => {
+  const auth = useContext(AuthContext);
+
+  const handleLogout = () => {
+    auth?.logout();
+  };
+
   return (
     <RequireAuth>
-      <div>Posts</div>
+      <Button color="error" onClick={handleLogout}>
+        Logout
+      </Button>
     </RequireAuth>
   );
 };
