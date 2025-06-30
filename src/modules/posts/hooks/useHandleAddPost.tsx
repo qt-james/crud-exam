@@ -4,7 +4,7 @@ import { FormSchema } from "@/utils/formSchemas";
 import { useState } from "react";
 import { addPost } from "@/api/posts";
 
-export default function useHandleAddPost() {
+export default function useHandleAddPost(fetchPost: () => Promise<void>) {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const toggleAddModalOpen = () => {
     setIsAddModalOpen(!isAddModalOpen);
@@ -23,7 +23,8 @@ export default function useHandleAddPost() {
       try {
         await addPost(values);
         resetForm();
-        setIsAddModalOpen(false)
+        setIsAddModalOpen(false);
+        fetchPost();
       } catch (error) {
         console.error(error);
       } finally {

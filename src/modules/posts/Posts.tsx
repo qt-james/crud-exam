@@ -6,11 +6,18 @@ import { Container, Button, Box } from "@mui/material";
 import useHandleAddPost from "./hooks/useHandleAddPost";
 import useHandleEditPost from "./hooks/useHandleEditPost";
 import useHandleDeletePost from "./hooks/useHandleDeletePost";
+import useHandleFetchPost from "./hooks/useHandleFetchPost";
+import { useEffect, useState } from "react";
 
 export default function Posts() {
-  const { addModalItems } = useHandleAddPost();
+  const { fetchAllPost, posts, isLoading } = useHandleFetchPost();
+  const { addModalItems } = useHandleAddPost(() => fetchAllPost());
   const { editModalItems, setPostToEdit } = useHandleEditPost();
   const { deleteModalItems } = useHandleDeletePost();
+
+  useEffect(() => {
+    fetchAllPost();
+  }, []);
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -35,6 +42,7 @@ export default function Posts() {
       <PostEditModal {...editModalItems} />
       <PostDeleteModal {...deleteModalItems} />
       <PostsTable
+        posts={posts}
         openEditModal={editModalItems.toggleEditModalOpen}
         openDeleteModal={deleteModalItems.toggleDeleteModalOpen}
         setPostToEdit={setPostToEdit}

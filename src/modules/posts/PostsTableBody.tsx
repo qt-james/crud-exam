@@ -9,7 +9,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { PostData, PostRequest } from "@/types/posts";
-import useHandleEditPost from "./hooks/useHandleEditPost";
 
 interface PostsTableProps {
   posts: PostData[];
