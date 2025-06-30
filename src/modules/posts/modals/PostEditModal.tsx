@@ -1,23 +1,23 @@
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
-import useHandleAddPost from "../hooks/useHandleAddPost";
+import useHandleEditPost from "../hooks/useHandleEditPost";
 
-interface PostAddModalProps {
-  toggleAddModalOpen: () => void;
-  isAddModalOpen: boolean;
+interface PostEditModalProps {
+  toggleEditModalOpen: () => void;
+  isEditModalOpen: boolean;
 }
 
-export default function PostAddModal(props: PostAddModalProps) {
-  const { formik } = useHandleAddPost();
-  const { toggleAddModalOpen, isAddModalOpen } = props;
+export default function PostEditModal(props: PostEditModalProps) {
+  const { formik } = useHandleEditPost();
+  const { toggleEditModalOpen, isEditModalOpen } = props;
 
   return (
     <>
       <ModalContainer
-        isOpen={isAddModalOpen}
-        toggleOpen={toggleAddModalOpen}
-        title={"Add Post :"}
+        isOpen={isEditModalOpen}
+        toggleOpen={toggleEditModalOpen}
+        title={"Edit Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
           <ModalTextField
@@ -48,7 +48,7 @@ export default function PostAddModal(props: PostAddModalProps) {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={toggleAddModalOpen}
+              onClick={toggleEditModalOpen}
             >
               Cancel
             </Button>
@@ -58,7 +58,7 @@ export default function PostAddModal(props: PostAddModalProps) {
               disabled={formik.isSubmitting}
               loading={formik.isSubmitting}
             >
-              Add Post
+              Edit Post
             </Button>
           </Stack>
         </form>

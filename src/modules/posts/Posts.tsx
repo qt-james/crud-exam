@@ -1,10 +1,13 @@
 import PostAddModal from "./modals/PostAddModal";
+import PostEditModal from "./modals/PostEditModal";
 import PostsTable from "./PostsTable";
 import { Container, Button, Box } from "@mui/material";
 import useHandleAddPost from "./hooks/useHandleAddPost";
+import useHandleEditPost from "./hooks/useHandleEditPost";
 
 export default function Posts() {
-  const { modalFunc } = useHandleAddPost();
+  const { addModalItems } = useHandleAddPost();
+  const { editModalItems, handleEdit } = useHandleEditPost();
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -20,13 +23,17 @@ export default function Posts() {
             fontWeight: 700,
           }}
           variant="contained"
-          onClick={modalFunc.toggleAddModalOpen}
+          onClick={addModalItems.toggleAddModalOpen}
         >
           Add Post
         </Button>
       </Box>
-      <PostAddModal {...modalFunc} />
-      <PostsTable />
+      <PostAddModal {...addModalItems} />
+      <PostEditModal {...editModalItems} />
+      <PostsTable
+        openEditModal={editModalItems.toggleEditModalOpen}
+        postToEdit={handleEdit}
+      />
     </Container>
   );
 }
