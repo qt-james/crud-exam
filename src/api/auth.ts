@@ -1,16 +1,5 @@
 import { http } from "@/utils/axiosConfig";
-
-interface SignupData {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}
-
-interface LoginData {
-  email: string;
-  password: string;
-}
+import { LoginData, SignupData } from "@/types/auth";
 
 export function authSignup(formData: SignupData) {
   return http("POST", "/user/signup", formData);

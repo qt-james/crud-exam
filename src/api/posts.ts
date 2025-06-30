@@ -1,9 +1,5 @@
 import { http } from "@/utils/axiosConfig";
-
-interface PostData {
-  title: string;
-  message: string;
-}
+import { PostData } from "@/types/posts";
 
 export function addPost(formData: PostData) {
   return http("POST", "/post", formData);
