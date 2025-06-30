@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   Box,
+  Link as MuiLink,
 } from "@mui/material";
 import useLogin from "./useLogin";
 
@@ -24,7 +25,7 @@ const Login = () => {
     >
       <Card sx={{ width: 400, p: 2 }}>
         <CardContent>
-          <Typography variant="h5" align="center">
+          <Typography variant="h3" align="center">
             Login
           </Typography>
           <form onSubmit={formik.handleSubmit}>
@@ -57,6 +58,14 @@ const Login = () => {
               Submit
             </Button>
           </form>
+          <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Typography variant="subtitle1">
+              Don&apos;t have an account?{" "}
+              <MuiLink underline="hover" href="/register">
+                Register
+              </MuiLink>
+            </Typography>
+          </Box>
         </CardContent>
       </Card>
     </Box>
