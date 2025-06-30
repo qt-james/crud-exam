@@ -4,27 +4,16 @@ import RequireAuth from "@/components/auth/RequireAuth";
 import { AuthContext } from "@/context/AuthProvider";
 import TablePosts from "@/components/table/TablePosts";
 import { getPosts } from "@/api/posts";
+import useGetPost from "./useGetPost";
 
 const Posts = () => {
   const auth = useContext(AuthContext);
-  const [posts, setPosts] = useState([]);
+
+  const { posts, fetchPosts } = useGetPost();
 
   const handleLogout = () => {
     auth?.logout();
   };
-
-  const fetchPosts = async () => {
-    try {
-      const data = await getPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error("Error fetching posts: ", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   return (
     <RequireAuth>
