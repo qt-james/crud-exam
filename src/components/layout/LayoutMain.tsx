@@ -16,6 +16,7 @@ export default function PublicLayout(props: AuthLayoutProps) {
 
   return (
     <Box
+      component={"main"}
       sx={{
         minHeight: "100vh",
         display: "flex",
