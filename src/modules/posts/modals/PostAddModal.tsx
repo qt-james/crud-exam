@@ -4,19 +4,20 @@ import { useState } from "react";
 import ModalTextField from "./ModalTextField";
 import useHandleAddPost from "../hooks/useHandleAddPost";
 
-export default function PostAddModal() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
-  const formik = useHandleAddPost();
+interface PostAddModalProps {
+  toggleAddModalOpen: () => void;
+  isAddModalOpen: boolean;
+}
+
+export default function PostAddModal(props: PostAddModalProps) {
+  const { formik } = useHandleAddPost();
+  const { toggleAddModalOpen, isAddModalOpen } = props;
 
   return (
     <>
-      <Button variant="contained" onClick={toggleOpen}>
-        Click Me!
-      </Button>
       <ModalContainer
-        isOpen={isOpen}
-        toggleOpen={toggleOpen}
+        isOpen={isAddModalOpen}
+        toggleOpen={toggleAddModalOpen}
         title={"Add Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -48,7 +49,7 @@ export default function PostAddModal() {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={toggleOpen}
+              onClick={toggleAddModalOpen}
             >
               Cancel
             </Button>
