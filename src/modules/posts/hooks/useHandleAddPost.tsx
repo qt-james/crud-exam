@@ -2,6 +2,7 @@ import { useFormik, FormikHelpers } from "formik";
 import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
 import { useState } from "react";
+import { addPost } from "@/api/posts";
 
 export default function useHandleAddPost() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -19,12 +20,15 @@ export default function useHandleAddPost() {
       values: PostRequest,
       { setSubmitting, resetForm }: FormikHelpers<PostRequest>
     ) => {
-      setSubmitting(true);
-      console.log(values);
-      setTimeout(() => {
+      try {
+        await addPost(values);
+        resetForm();
+        setIsAddModalOpen(false)
+      } catch (error) {
+        console.error(error);
+      } finally {
         setSubmitting(false);
-      }, 1000);
-      resetForm();
+      }
     },
   });
 
