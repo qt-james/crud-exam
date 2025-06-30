@@ -29,10 +29,10 @@ export default function useHandleAddPost() {
   });
 
   return {
-    formik,
     addModalItems: {
       isAddModalOpen,
       toggleAddModalOpen,
+      formik,
     },
   };
 }

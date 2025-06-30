@@ -15,10 +15,11 @@ interface PostsTableProps {
   posts: PostData[];
   setPostToEdit: (post: PostRequest) => void;
   openEditModal: () => void;
+  openDeleteModal: () => void;
 }
 
 export default function PostsTableBody(props: PostsTableProps) {
-  const { posts, openEditModal, setPostToEdit } = props;
+  const { posts, openEditModal, setPostToEdit, openDeleteModal } = props;
 
   return (
     <TableBody>
@@ -47,7 +48,11 @@ export default function PostsTableBody(props: PostsTableProps) {
                 >
                   <EditIcon sx={{ fill: "green" }} />
                 </IconButton>
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    openDeleteModal();
+                  }}
+                >
                   <DeleteIcon sx={{ fill: "red" }} />
                 </IconButton>
               </Stack>

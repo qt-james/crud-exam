@@ -1,11 +1,13 @@
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
+import { FormikProps } from "formik";
+import { PostRequest } from "@/types/posts";
 
 interface PostEditModalProps {
   toggleEditModalOpen: () => void;
   isEditModalOpen: boolean;
-  formik: any;
+  formik: FormikProps<PostRequest>;
 }
 
 export default function PostEditModal(props: PostEditModalProps) {
