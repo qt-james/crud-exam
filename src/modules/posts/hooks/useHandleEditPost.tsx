@@ -3,18 +3,20 @@ import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
 import { useState } from "react";
 
-export default function useHandleAddPost() {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const toggleAddModalOpen = () => setIsAddModalOpen(!isAddModalOpen);
+export default function useHandleEditPost() {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const toggleEditModalOpen = () => setIsEditModalOpen(!isEditModalOpen);
+  const [postToEdit, setPostToEdit] = useState<PostRequest>({
+    title: "",
+    message: "",
+  });
 
   const formik = useFormik<PostRequest>({
-    initialValues: {
-      title: "",
-      message: "",
-    },
+    initialValues: postToEdit,
+    enableReinitialize: true,
     validationSchema: FormSchema,
     onSubmit: async (
-      values: PostRequest,
+      values,
       { setSubmitting, resetForm }: FormikHelpers<PostRequest>
     ) => {
       setSubmitting(true);
@@ -26,11 +28,16 @@ export default function useHandleAddPost() {
     },
   });
 
+  const handleEdit = (data: PostRequest) => {
+    setPostToEdit(data);
+  };
+
   return {
     formik,
-    addModalItems: {
-      isAddModalOpen,
-      toggleAddModalOpen,
+    editModalItems: {
+      isEditModalOpen,
+      toggleEditModalOpen,
     },
+    handleEdit,
   };
 }
