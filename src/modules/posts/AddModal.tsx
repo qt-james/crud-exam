@@ -54,16 +54,22 @@ const AddModal = ({ open, onClose }: AddProps) => {
 
   const actions = (
     <>
-      <Button type="submit" onClick={formik.submitForm}>
-        Add Post
-      </Button>
       <Button
+        color="primary"
         onClick={() => {
           formik.resetForm();
           onClose();
         }}
       >
         Cancel
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={formik.submitForm}
+      >
+        Add Post
       </Button>
     </>
   );
