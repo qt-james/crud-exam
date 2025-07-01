@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Stack, IconButton } from "@mui/material";
+import { Box, Typography, Stack, IconButton } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 

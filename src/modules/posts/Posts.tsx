@@ -7,20 +7,20 @@ import useHandleAddPost from "./hooks/useHandleAddPost";
 import useHandleEditPost from "./hooks/useHandleEditPost";
 import useHandleDeletePost from "./hooks/useHandleDeletePost";
 import useHandleFetchPost from "./hooks/useHandleFetchPost";
-import useHandlePagination from "./hooks/useHandlePagination";
 import { Container, Button, Box } from "@mui/material";
 
 export default function Posts() {
-  const { fetchAllPost, posts, isLoading, metaDatas, setPosts, setMetaDatas } =
-    useHandleFetchPost();
+  const {
+    fetchAllPost,
+    posts,
+    isLoading,
+    currentPage,
+    totalPages,
+    handlePagination,
+  } = useHandleFetchPost();
   const addModalItems = useHandleAddPost(fetchAllPost);
   const editModalItems = useHandleEditPost(fetchAllPost);
   const deleteModalItems = useHandleDeletePost(fetchAllPost);
-  const paginationItems = useHandlePagination(
-    metaDatas,
-    setPosts,
-    setMetaDatas
-  );
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -50,7 +50,11 @@ export default function Posts() {
         openEditModal={editModalItems.toggleEditModalOpen}
         openDeleteModal={deleteModalItems.toggleDeleteModalOpen}
       />
-      <PostPagination {...paginationItems} />
+      <PostPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePagination={handlePagination}
+      />
     </Container>
   );
 }
