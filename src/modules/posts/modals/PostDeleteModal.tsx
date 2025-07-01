@@ -3,15 +3,13 @@ import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack, Box, Typography } from "@mui/material";
 
 interface PostDeleteModalProps {
+  isDeleteModalOpen: { isOpen: boolean; id: string };
   toggleDeleteModalOpen: (id: string) => void;
-  isDeleteModalOpen: boolean;
-  postId: string;
-  onDeletePost: (id: string) => Promise<void>;
+  onDeletePost: () => Promise<void>;
 }
 
 export default function PostDeleteModal(props: PostDeleteModalProps) {
-  const { toggleDeleteModalOpen, isDeleteModalOpen, postId, onDeletePost } =
-    props;
+  const { isDeleteModalOpen, toggleDeleteModalOpen, onDeletePost } = props;
 
   function openDeleteModal() {
     toggleDeleteModalOpen("");
@@ -19,7 +17,7 @@ export default function PostDeleteModal(props: PostDeleteModalProps) {
 
   return (
     <ModalContainer
-      isOpen={isDeleteModalOpen}
+      isOpen={isDeleteModalOpen.isOpen}
       toggleOpen={openDeleteModal}
       title={"Delete Post"}
     >
@@ -42,14 +40,14 @@ export default function PostDeleteModal(props: PostDeleteModalProps) {
           variant="outlined"
           onClick={openDeleteModal}
           sx={{
-            color: "#F54C4E", // text color
+            color: "#F54C4E",
             borderColor: "#F54C4E",
           }}
         >
           Cancel
         </Button>
         <Button
-          onClick={() => onDeletePost(postId)}
+          onClick={onDeletePost}
           variant="contained"
           sx={{ backgroundColor: "#F54C4E" }}
         >

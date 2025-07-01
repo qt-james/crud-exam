@@ -5,16 +5,18 @@ import { useState } from "react";
 import { editPost } from "@/api/posts";
 
 export default function useHandleEditPost(fetchPost: () => Promise<void>) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [postId, setPostId] = useState("");
+  const [isEditModalOpen, setIsEditModalOpen] = useState({
+    isOpen: false,
+    id: "",
+  });
   const [postToEdit, setPostToEdit] = useState<PostRequest>({
     title: "",
     message: "",
   });
+
   const toggleEditModalOpen = (id: string, item: PostRequest) => {
-    setIsEditModalOpen(!isEditModalOpen);
+    setIsEditModalOpen({ isOpen: !isEditModalOpen.isOpen, id: id });
     setPostToEdit(item);
-    setPostId(id);
   };
 
   const formik = useFormik<PostRequest>({
@@ -29,9 +31,9 @@ export default function useHandleEditPost(fetchPost: () => Promise<void>) {
     { setSubmitting, resetForm }: FormikHelpers<PostRequest>
   ) {
     try {
-      await editPost(postId, values);
+      await editPost(isEditModalOpen.id, values);
       resetForm();
-      setIsEditModalOpen(false);
+      setIsEditModalOpen({ isOpen: !isEditModalOpen.isOpen, id: "" });
       fetchPost();
     } catch (error) {
       console.error(error);

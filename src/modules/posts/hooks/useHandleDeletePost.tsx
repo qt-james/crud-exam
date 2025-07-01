@@ -2,17 +2,19 @@ import { useState } from "react";
 import { deletePost } from "@/api/posts";
 
 export default function useHandleDeletePost(fetchPost: () => Promise<void>) {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [postId, setPostId] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState({
+    isOpen: false,
+    id: "",
+  });
+
   const toggleDeleteModalOpen = (id: string) => {
-    setIsDeleteModalOpen(!isDeleteModalOpen);
-    setPostId(id)
+    setIsDeleteModalOpen({ isOpen: !isDeleteModalOpen.isOpen, id: id });
   };
 
-  async function onDeletePost(id: string): Promise<void> {
+  async function onDeletePost(): Promise<void> {
     try {
-      await deletePost(id);
-      setIsDeleteModalOpen(false);
+      await deletePost(isDeleteModalOpen.id);
+      setIsDeleteModalOpen({ isOpen: !isDeleteModalOpen.isOpen, id: "" });
       fetchPost();
     } catch (error) {
       console.error(error);
@@ -22,7 +24,6 @@ export default function useHandleDeletePost(fetchPost: () => Promise<void>) {
   return {
     isDeleteModalOpen,
     toggleDeleteModalOpen,
-    postId, 
-    onDeletePost
+    onDeletePost,
   };
 }

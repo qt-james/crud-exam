@@ -6,7 +6,7 @@ import { PostRequest } from "@/types/posts";
 
 interface PostEditModalProps {
   toggleEditModalOpen: (id: string, item: PostRequest) => void;
-  isEditModalOpen: boolean;
+  isEditModalOpen: {isOpen: boolean, id: string};
   formik: FormikProps<PostRequest>;
 }
 
@@ -21,7 +21,7 @@ export default function PostEditModal(props: PostEditModalProps) {
   return (
     <>
       <ModalContainer
-        isOpen={isEditModalOpen}
+        isOpen={isEditModalOpen.isOpen}
         toggleOpen={openEditModal}
         title={"Edit Post :"}
       >
