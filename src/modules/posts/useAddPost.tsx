@@ -1,5 +1,5 @@
 import { addPost } from "@/api/posts";
-import { useFormik, yupToFormErrors } from "formik";
+import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 

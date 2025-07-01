@@ -4,13 +4,17 @@ import {
   TableRow,
   TableCell,
   Typography,
+  IconButton,
 } from "@mui/material";
 import { PostData } from "@/types/posts";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 interface TableProps {
   posts: PostData[];
+  handleEditOpen: () => void;
+  setSelectedPost: (posts: PostData) => void;
 }
-const TableBody = ({ posts }: TableProps) => {
+const TableBody = ({ posts, handleEditOpen, setSelectedPost }: TableProps) => {
   return (
     <MuiTableBody>
       {posts.length === 0 ? (
@@ -27,7 +31,16 @@ const TableBody = ({ posts }: TableProps) => {
             <TableCell>
               {new Date(post.createdAt).toLocaleDateString()}
             </TableCell>
-            <TableCell>{/*Action Buttons */}</TableCell>
+            <TableCell>
+              <IconButton
+                onClick={() => {
+                  setSelectedPost(post);
+                  handleEditOpen();
+                }}
+              >
+                <ModeEditIcon />
+              </IconButton>
+            </TableCell>
           </TableRow>
         ))
       )}

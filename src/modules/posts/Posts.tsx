@@ -5,6 +5,8 @@ import useGetPost from "./useGetPost";
 import RouteProtection from "@/components/route/RouteProtection";
 import AddModal from "./AddModal";
 import useAddPost from "./useAddPost";
+import EditModal from "./EditModal";
+import useEditPost from "./useEditPost";
 
 const Posts = () => {
   const { posts, fetchPosts } = useGetPost();
@@ -12,6 +14,18 @@ const Posts = () => {
     useAddPost({
       fetchPosts,
     });
+
+  const {
+    isEditOpen,
+    handleEditOpen,
+    handleEditClose,
+    selectedPost,
+    setSelectedPost,
+    formik: editFormik,
+    isLoading: isEditLoading,
+  } = useEditPost({
+    fetchPosts,
+  });
 
   return (
     <RouteProtection>
@@ -35,12 +49,23 @@ const Posts = () => {
             </Button>
           </Box>
         </Box>
-        <Table posts={posts} />
+        <Table
+          posts={posts}
+          handleEditOpen={handleEditOpen}
+          setSelectedPost={setSelectedPost}
+        />
       </Box>
 
       <AddModal
         open={isAddOpen}
         onClose={handleAddClose}
+        formik={formik}
+        isLoading={isLoading}
+      />
+
+      <EditModal
+        open={isEditOpen}
+        onClose={handleEditClose}
         formik={formik}
         isLoading={isLoading}
       />

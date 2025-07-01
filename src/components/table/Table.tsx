@@ -7,14 +7,20 @@ import TableBody from "./TableBody";
 
 interface TableProps {
   posts: PostData[];
+  handleEditOpen: () => void;
+  setSelectedPost: (posts: PostData) => void;
 }
 
-const TablePosts = ({ posts }: TableProps) => {
+const TablePosts = ({ posts, handleEditOpen, setSelectedPost }: TableProps) => {
   return (
     <TableContainer>
       <MuiTable>
         <TableHeader />
-        <TableBody posts={posts} />
+        <TableBody
+          posts={posts}
+          handleEditOpen={handleEditOpen}
+          setSelectedPost={setSelectedPost}
+        />
       </MuiTable>
     </TableContainer>
   );

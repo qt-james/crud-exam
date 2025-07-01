@@ -25,6 +25,11 @@ axiosInstance.interceptors.response.use(
       cookies.remove(AUTH_COOKIE_NAME);
       return Promise.reject(error);
     }
+    if (error.response?.status === 403) {
+      console.warn("Token expired or unauthorized.");
+      cookies.remove(AUTH_COOKIE_NAME);
+      return Promise.reject(error);
+    }
     return Promise.reject(error);
   }
 );
