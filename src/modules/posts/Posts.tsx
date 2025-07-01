@@ -8,7 +8,10 @@ import useAddPost from "./useAddPost";
 
 const Posts = () => {
   const { posts, fetchPosts } = useGetPost();
-  const { isAddOpen, handleAddOpen, handleAddClose } = useAddPost();
+  const { isAddOpen, handleAddOpen, handleAddClose, formik, isLoading } =
+    useAddPost({
+      fetchPosts,
+    });
 
   return (
     <RouteProtection>
@@ -38,7 +41,8 @@ const Posts = () => {
       <AddModal
         open={isAddOpen}
         onClose={handleAddClose}
-        fetchPosts={fetchPosts}
+        formik={formik}
+        isLoading={isLoading}
       />
     </RouteProtection>
   );

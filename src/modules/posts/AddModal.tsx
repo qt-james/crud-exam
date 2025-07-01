@@ -1,34 +1,17 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import Modal from "@/components/modal/Modal";
-import { addPost, getPosts } from "@/api/posts";
+import { FormikProps } from "formik";
+import { PostRequest } from "@/types/posts";
 
-interface AddProps {
+interface AddPropsModal {
   open: boolean;
   onClose: () => void;
-  fetchPosts: () => void;
+  formik: FormikProps<PostRequest>;
+  isLoading: boolean;
 }
 
-const AddModal = ({ open, onClose, fetchPosts }: AddProps) => {
-  const formik = useFormik({
-    initialValues: {
-      title: "",
-      message: "",
-    },
-    validationSchema: yup.object({
-      title: yup.string().required("Title is required"),
-      message: yup.string().required("Message is required"),
-    }),
-    onSubmit: async (values, { resetForm }) => {
-      await addPost(values);
-      await fetchPosts();
-      resetForm();
-      onClose();
-    },
-  });
-
+const AddModal = ({ open, onClose, formik, isLoading }: AddPropsModal) => {
   const content = (
     <form onSubmit={formik.handleSubmit}>
       <TextField
@@ -63,6 +46,7 @@ const AddModal = ({ open, onClose, fetchPosts }: AddProps) => {
           formik.resetForm();
           onClose();
         }}
+        disabled={isLoading}
       >
         Cancel
       </Button>
@@ -71,6 +55,8 @@ const AddModal = ({ open, onClose, fetchPosts }: AddProps) => {
         color="primary"
         type="submit"
         onClick={formik.submitForm}
+        disabled={isLoading}
+        loading={isLoading}
       >
         Add Post
       </Button>
