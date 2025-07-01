@@ -1,17 +1,17 @@
 import React from "react";
 import { TableCell, TableHead, TableRow } from "@mui/material";
 
-const TablePostsHeader = () => {
+const TableHeader = () => {
   const headerTexts = ["Title", "Message", "Date", "Actions"];
   return (
     <TableHead>
       <TableRow>
         {headerTexts.map((col) => (
-          <TableCell>{col}</TableCell>
+          <TableCell key={col}>{col}</TableCell>
         ))}
       </TableRow>
     </TableHead>
   );
 };
 
-export default TablePostsHeader;
+export default TableHeader;

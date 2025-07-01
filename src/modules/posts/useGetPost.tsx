@@ -1,9 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { getPosts } from "@/api/posts";
+import { AuthContext } from "@/context/AuthProvider";
 
 const useGetPost = () => {
   const [posts, setPosts] = useState([]);
+  const { isAuth } = useContext(AuthContext);
 
   const fetchPosts = async () => {
     try {
@@ -15,8 +17,10 @@ const useGetPost = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if (isAuth) {
+      fetchPosts();
+    }
+  }, [isAuth]);
 
   return {
     posts,

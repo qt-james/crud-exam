@@ -6,22 +6,28 @@ interface AuthProps {
   children: ReactNode;
 }
 
-const RequireAuth = ({ children }: AuthProps) => {
+const RouteProtection = ({ children }: AuthProps) => {
   const [hasMounted, setHasMounted] = useState(false);
   const auth = useContext(AuthContext);
   const router = useRouter();
 
   useEffect(() => {
     setHasMounted(true); // Wait until component is mounted
-    if (!auth?.isAuth) {
+    const publicRoutes = ["/", "/register"];
+    const isPublicRoute = publicRoutes.includes(router.pathname);
+
+    if (!auth?.isAuth && !isPublicRoute) {
       router.push("/");
     }
-  }, [auth?.isAuth, router]);
+    if (auth?.isAuth && isPublicRoute) {
+      router.push("/posts");
+    }
+  }, [auth?.isAuth, router.pathname]);
 
   // Prevent hydration mismatch by avoiding render before mount
-  if (!hasMounted || !auth?.isAuth) return null;
+  if (!hasMounted) return null;
 
   return <>{children}</>;
 };
 
-export default RequireAuth;
+export default RouteProtection;

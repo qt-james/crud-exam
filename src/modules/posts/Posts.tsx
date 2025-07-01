@@ -1,22 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import { Button, Box, Typography } from "@mui/material";
-import RequireAuth from "@/components/auth/RequireAuth";
-import { AuthContext } from "@/context/AuthProvider";
-import TablePosts from "@/components/table/TablePosts";
-import { getPosts } from "@/api/posts";
+import Table from "@/components/table/Table";
 import useGetPost from "./useGetPost";
+import RouteProtection from "@/components/route/RouteProtection";
 
 const Posts = () => {
-  const auth = useContext(AuthContext);
-
-  const { posts, fetchPosts } = useGetPost();
-
-  const handleLogout = () => {
-    auth?.logout();
-  };
+  const { posts } = useGetPost();
 
   return (
-    <RequireAuth>
+    <RouteProtection>
       <Box sx={{ p: 4, height: "100vh", backgroundColor: "white" }}>
         <Box
           sx={{
@@ -33,14 +25,11 @@ const Posts = () => {
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
             <Button variant="contained">Add Post</Button>
-            <Button variant="outlined" color="error" onClick={handleLogout}>
-              Logout
-            </Button>
           </Box>
         </Box>
-        <TablePosts posts={posts} />
+        <Table posts={posts} />
       </Box>
-    </RequireAuth>
+    </RouteProtection>
   );
 };
 
