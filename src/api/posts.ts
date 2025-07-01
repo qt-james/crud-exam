@@ -8,6 +8,7 @@ export function addPost(formData: PostRequest): Promise<CommonResponse> {
 
 export function getPosts(params: {
   limit: string;
+  offset?: string | number
   order: string;
 }): Promise<PostResponse> {
   return fetcher("GET", "/post", params);

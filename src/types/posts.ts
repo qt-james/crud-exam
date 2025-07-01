@@ -7,7 +7,7 @@ export interface PostData {
   userId?: string;
 }
 
-interface PostMeta {
+export interface PostMeta {
   totalPages: number;
   totalRows: number;
   limit: string;

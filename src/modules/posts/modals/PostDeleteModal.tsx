@@ -1,7 +1,6 @@
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack, Box, Typography } from "@mui/material";
-import { FormikProps } from "formik";
 
 interface PostDeleteModalProps {
   toggleDeleteModalOpen: (id: string) => void;

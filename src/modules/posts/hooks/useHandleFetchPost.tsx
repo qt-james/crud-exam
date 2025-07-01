@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { getPosts } from "@/api/posts";
-import { PostData } from "@/types/posts";
+import { PostData, PostMeta } from "@/types/posts";
 
 export default function useHandleFetchPost() {
   const [posts, setPosts] = useState<PostData[]>([]);
+  const [metaDatas, setMetaDatas] = useState<PostMeta>({} as PostMeta);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function fetchAllPost(): Promise<void> {
@@ -12,6 +13,7 @@ export default function useHandleFetchPost() {
 
       const response = await getPosts({ limit: "5", order: "DESC" });
       setPosts(response.data);
+      setMetaDatas(response.meta);
 
       console.log("Fetched posts:", response.data);
     } catch (error) {
@@ -25,5 +27,5 @@ export default function useHandleFetchPost() {
     fetchAllPost();
   }, []);
 
-  return { fetchAllPost, posts, isLoading };
+  return { fetchAllPost, posts, isLoading, metaDatas, setPosts, setMetaDatas };
 }

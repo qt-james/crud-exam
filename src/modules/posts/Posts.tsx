@@ -2,18 +2,25 @@ import PostAddModal from "./modals/PostAddModal";
 import PostEditModal from "./modals/PostEditModal";
 import PostDeleteModal from "./modals/PostDeleteModal";
 import PostsTable from "./PostsTable";
-import { Container, Button, Box } from "@mui/material";
+import PostPagination from "./PostsPagination";
 import useHandleAddPost from "./hooks/useHandleAddPost";
 import useHandleEditPost from "./hooks/useHandleEditPost";
 import useHandleDeletePost from "./hooks/useHandleDeletePost";
 import useHandleFetchPost from "./hooks/useHandleFetchPost";
-import { useEffect, useState } from "react";
+import useHandlePagination from "./hooks/useHandlePagination";
+import { Container, Button, Box } from "@mui/material";
 
 export default function Posts() {
-  const { fetchAllPost, posts, isLoading } = useHandleFetchPost();
+  const { fetchAllPost, posts, isLoading, metaDatas, setPosts, setMetaDatas } =
+    useHandleFetchPost();
   const addModalItems = useHandleAddPost(fetchAllPost);
   const editModalItems = useHandleEditPost(fetchAllPost);
   const deleteModalItems = useHandleDeletePost(fetchAllPost);
+  const paginationItems = useHandlePagination(
+    metaDatas,
+    setPosts,
+    setMetaDatas
+  );
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -43,6 +50,7 @@ export default function Posts() {
         openEditModal={editModalItems.toggleEditModalOpen}
         openDeleteModal={deleteModalItems.toggleDeleteModalOpen}
       />
+      <PostPagination {...paginationItems} />
     </Container>
   );
 }

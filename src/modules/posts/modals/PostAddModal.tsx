@@ -1,7 +1,6 @@
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
-import useHandleAddPost from "../hooks/useHandleAddPost";
 import { FormikProps } from "formik";
 import { PostRequest } from "@/types/posts";
 

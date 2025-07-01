@@ -39,7 +39,16 @@ export default function PostsTableBody(props: PostsTableProps) {
           <TableRow key={index}>
             <TableCell>{item.title}</TableCell>
             <TableCell>{item.message}</TableCell>
-            <TableCell>{item.createdAt}</TableCell>
+            <TableCell>
+              {new Date(item.updatedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </TableCell>
             <TableCell
               sx={{
                 width: "1%",
