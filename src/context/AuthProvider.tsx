@@ -17,9 +17,13 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
+export const AuthContext = createContext<AuthContextType>({
+  isAuth: false,
+  isLoading: false,
+  login: () => ({}),
+  signup: () => ({}),
+  logout: () => ({}),
+});
 
 const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;

@@ -1,21 +1,35 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Box, Typography } from "@mui/material";
-import RequireAuth from "@/components/auth/RequireAuth";
-import { AuthContext } from "@/context/AuthProvider";
+import Table from "@/components/table/Table";
+import useGetPost from "./useGetPost";
+import RouteProtection from "@/components/route/RouteProtection";
 
 const Posts = () => {
-  const auth = useContext(AuthContext);
-
-  const handleLogout = () => {
-    auth?.logout();
-  };
+  const { posts } = useGetPost();
 
   return (
-    <RequireAuth>
-      <Button color="error" onClick={handleLogout}>
-        Logout
-      </Button>
-    </RequireAuth>
+    <RouteProtection>
+      <Box sx={{ p: 4, height: "100vh", backgroundColor: "white" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 3,
+            flexWrap: "wrap",
+            gap: 2,
+          }}
+        >
+          <Typography variant="h4" fontWeight={600} color="black">
+            Posts
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Button variant="contained">Add Post</Button>
+          </Box>
+        </Box>
+        <Table posts={posts} />
+      </Box>
+    </RouteProtection>
   );
 };
 

@@ -1,37 +1,20 @@
+// components/table/TablePosts.tsx
 import React from "react";
-import {
-  TableContainer,
-  Table as MuiTable,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { TableContainer, Table as MuiTable } from "@mui/material";
+import TableHeader from "./TableHeader";
+import { PostData } from "@/types/posts";
+import TableBody from "./TableBody";
 
-const TablePosts = () => {
+interface TableProps {
+  posts: PostData[];
+}
+
+const TablePosts = ({ posts }: TableProps) => {
   return (
     <TableContainer>
       <MuiTable>
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Message</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            {/* if posts length = 0*/}
-            <TableCell colSpan={4} align="center">
-              <Typography variant="h6">No posts yet</Typography>
-            </TableCell>
-          </TableRow>
-
-          {/* map posts in this TableRow */}
-        </TableBody>
+        <TableHeader />
+        <TableBody posts={posts} />
       </MuiTable>
     </TableContainer>
   );

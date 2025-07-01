@@ -6,7 +6,7 @@ export function addPost(formData: PostData) {
 }
 
 export function getPosts() {
-  return http("GET", "/post");
+  return http("GET", "/post?limit=5&order=DESC");
 }
 
 export function getPost(postId: string) {

@@ -1,7 +1,12 @@
+import Header from "@/components/pages/Header";
 import Posts from "@/modules/posts/Posts";
 
 function Index() {
-  return <Posts />;
+  return (
+    <Header>
+      <Posts />
+    </Header>
+  );
 }
 
 export default Index;
