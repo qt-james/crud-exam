@@ -3,9 +3,12 @@ import { Button, Box, Typography } from "@mui/material";
 import Table from "@/components/table/Table";
 import useGetPost from "./useGetPost";
 import RouteProtection from "@/components/route/RouteProtection";
+import AddModal from "./AddModal";
+import useAddPost from "./useAddPost";
 
 const Posts = () => {
   const { posts } = useGetPost();
+  const { isAddOpen, handleAddOpen, handleAddClose } = useAddPost();
 
   return (
     <RouteProtection>
@@ -24,11 +27,15 @@ const Posts = () => {
             Posts
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Button variant="contained">Add Post</Button>
+            <Button variant="contained" onClick={handleAddOpen}>
+              Add Post
+            </Button>
           </Box>
         </Box>
         <Table posts={posts} />
       </Box>
+
+      <AddModal open={isAddOpen} onClose={handleAddClose} />
     </RouteProtection>
   );
 };
