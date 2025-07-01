@@ -1,7 +1,7 @@
 import { http } from "@/utils/axiosConfig";
-import { PostData } from "@/types/posts";
+import { PostData, PostRequest } from "@/types/posts";
 
-export function addPost(formData: PostData) {
+export function addPost(formData: PostRequest) {
   return http("POST", "/post", formData);
 }
 

@@ -3,13 +3,15 @@ import { TextField, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Modal from "@/components/modal/Modal";
+import { addPost, getPosts } from "@/api/posts";
 
 interface AddProps {
   open: boolean;
   onClose: () => void;
+  fetchPosts: () => void;
 }
 
-const AddModal = ({ open, onClose }: AddProps) => {
+const AddModal = ({ open, onClose, fetchPosts }: AddProps) => {
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -19,8 +21,9 @@ const AddModal = ({ open, onClose }: AddProps) => {
       title: yup.string().required("Title is required"),
       message: yup.string().required("Message is required"),
     }),
-    onSubmit: (values, { resetForm }) => {
-      console.log("Form Submitted:", values);
+    onSubmit: async (values, { resetForm }) => {
+      await addPost(values);
+      await fetchPosts();
       resetForm();
       onClose();
     },

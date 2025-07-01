@@ -7,7 +7,7 @@ import AddModal from "./AddModal";
 import useAddPost from "./useAddPost";
 
 const Posts = () => {
-  const { posts } = useGetPost();
+  const { posts, fetchPosts } = useGetPost();
   const { isAddOpen, handleAddOpen, handleAddClose } = useAddPost();
 
   return (
@@ -35,7 +35,11 @@ const Posts = () => {
         <Table posts={posts} />
       </Box>
 
-      <AddModal open={isAddOpen} onClose={handleAddClose} />
+      <AddModal
+        open={isAddOpen}
+        onClose={handleAddClose}
+        fetchPosts={fetchPosts}
+      />
     </RouteProtection>
   );
 };
