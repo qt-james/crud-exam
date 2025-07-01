@@ -3,6 +3,7 @@ import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
 import { useState } from "react";
 import { editPost } from "@/api/posts";
+import { useAlert } from "@/context/AlertProvider";
 
 export default function useHandleEditPost(fetchPost: () => Promise<void>) {
   const [isEditModalOpen, setIsEditModalOpen] = useState({
@@ -13,6 +14,7 @@ export default function useHandleEditPost(fetchPost: () => Promise<void>) {
     title: "",
     message: "",
   });
+  const { showAlert } = useAlert();
 
   const toggleEditModalOpen = (id: string, item: PostRequest) => {
     setIsEditModalOpen({ isOpen: !isEditModalOpen.isOpen, id: id });
@@ -35,6 +37,7 @@ export default function useHandleEditPost(fetchPost: () => Promise<void>) {
       resetForm();
       setIsEditModalOpen({ isOpen: !isEditModalOpen.isOpen, id: "" });
       fetchPost();
+      showAlert("Successfully edited a post!", "success");
     } catch (error) {
       console.error(error);
     } finally {

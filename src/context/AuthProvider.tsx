@@ -4,6 +4,8 @@ import { SESSION_COOKIE } from "@/configs/constants";
 import { authLogin, authSignup } from "@/api/auth";
 import { useRouter } from "next/router";
 import { LoginRequest, SignupRequest } from "@/types/auth";
+import { useAlert } from "@/context/AlertProvider";
+import { isAxiosError } from "axios";
 
 interface AuthContextType {
   isAuth: boolean;
@@ -24,6 +26,7 @@ export function AuthProvider(props: AuthContextProps) {
   const [isAuth, setIsAuth] = useState<boolean>(!!cookies.get(SESSION_COOKIE));
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   async function login(formData: LoginRequest): Promise<void> {
     try {
@@ -32,8 +35,11 @@ export function AuthProvider(props: AuthContextProps) {
       const response = await authLogin(formData);
       cookies.set(SESSION_COOKIE, response.data.token);
       setIsAuth(true);
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.status === 401) {
+        showAlert("Incorrect Password or Email!", "error");
+        return;
+      }
     }
 
     setIsLoading(false);

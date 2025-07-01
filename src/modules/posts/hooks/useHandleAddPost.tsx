@@ -3,12 +3,14 @@ import { PostRequest } from "@/types/posts";
 import { FormSchema } from "@/utils/formSchemas";
 import { useState } from "react";
 import { addPost } from "@/api/posts";
+import { useAlert } from "@/context/AlertProvider";
 
 export default function useHandleAddPost(fetchPost: () => Promise<void>) {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const toggleAddModalOpen = () => {
     setIsAddModalOpen(!isAddModalOpen);
   };
+  const { showAlert } = useAlert();
 
   const formik = useFormik<PostRequest>({
     initialValues: {
@@ -28,6 +30,7 @@ export default function useHandleAddPost(fetchPost: () => Promise<void>) {
       resetForm();
       setIsAddModalOpen(false);
       fetchPost();
+      showAlert("Successfully added a post!", "success");
     } catch (error) {
       console.error(error);
     } finally {

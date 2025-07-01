@@ -2,9 +2,12 @@ import { useFormik, FormikHelpers } from "formik";
 import { LoginRequest } from "@/types/auth";
 import { useAuth } from "@/context/AuthProvider";
 import { LoginSchema } from "@/utils/formSchemas";
+import { useAlert } from "@/context/AlertProvider";
+import { isAxiosError } from "axios";
 
 export default function useHandleLogIn() {
   const { login } = useAuth();
+  const { showAlert } = useAlert();
 
   const formik = useFormik<LoginRequest>({
     initialValues: {
@@ -17,9 +20,10 @@ export default function useHandleLogIn() {
       { setSubmitting }: FormikHelpers<LoginRequest>
     ) => {
       try {
-        await login(values);
+        const response = await login(values);
+        showAlert("Welcome User!", "success");
       } catch (error) {
-        console.error("Login failed:", error);
+        console.log(error);
       } finally {
         setSubmitting(false);
       }
