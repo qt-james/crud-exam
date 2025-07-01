@@ -29,7 +29,7 @@ const Modal = ({ open, onClose, title, content, actions }: ModalProps) => {
   return (
     <MuiModal open={open} onClose={onClose}>
       <Box sx={modalStyle}>
-        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+        <Typography color="black" variant="h6" component="h2" sx={{ mb: 2 }}>
           {title}
         </Typography>
         {content}
