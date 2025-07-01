@@ -1,75 +1,28 @@
-import * as React from "react";
 import PostsTableHeader from "./PostsTableHeader";
 import PostsTableBody from "./PostsTableBody";
 import { Table, TableContainer, Paper } from "@mui/material";
 import { PostData, PostRequest } from "@/types/posts";
 
-interface PostsType {
-  posts: PostData[];
-}
-
 interface PostTableProps {
-  openEditModal: () => void;
-  openDeleteModal: () => void;
-  setPostToEdit: (post: PostRequest) => void;
+  posts: PostData[];
+  openEditModal: (id: string, item: PostRequest) => void;
+  openDeleteModal: (id: string) => void;
+  isLoading: boolean;
 }
 
-const posts = [
-  {
-    postId: "1",
-    title: "Testing",
-    message: "Testing Message",
-    createdAt: "Jan 12, 1980",
-    updatedAt: "Jan 12, 1980",
-    userId: "1212",
-  },
-  {
-    postId: "1",
-    title: "Testing",
-    message: "Testing Message",
-    createdAt: "Jan 12, 1980",
-    updatedAt: "Jan 12, 1980",
-    userId: "1212",
-  },
-  {
-    postId: "1",
-    title: "Testing",
-    message: "Testing Message",
-    createdAt: "Jan 12, 1980",
-    updatedAt: "Jan 12, 1980",
-    userId: "1212",
-  },
-  {
-    postId: "1",
-    title: "Testing",
-    message: "Testing Message",
-    createdAt: "Jan 12, 1980",
-    updatedAt: "Jan 12, 1980",
-    userId: "1212",
-  },
-  {
-    postId: "1",
-    title: "Testing",
-    message: "Testing Message",
-    createdAt: "Jan 12, 1980",
-    updatedAt: "Jan 12, 1980",
-    userId: "1212",
-  },
-];
-
-const headerTitles = ["Title", "Message", "Data", "Actions"];
+const headerTitles = ["Title", "Message", "Date", "Actions"];
 
 export default function PostsTable(props: PostTableProps) {
-  const { openEditModal, setPostToEdit, openDeleteModal } = props;
+  const { openEditModal, openDeleteModal, posts, isLoading } = props;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ height: 430}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <PostsTableHeader headerTitle={headerTitles} />
         <PostsTableBody
+          isLoading={isLoading}
           posts={posts}
           openEditModal={openEditModal}
-          setPostToEdit={setPostToEdit}
           openDeleteModal={openDeleteModal}
         />
       </Table>

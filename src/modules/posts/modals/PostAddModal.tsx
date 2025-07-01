@@ -1,7 +1,6 @@
 import ModalContainer from "@/components/modal/ModalContainer";
 import { Button, Stack } from "@mui/material";
 import ModalTextField from "./ModalTextField";
-import useHandleAddPost from "../hooks/useHandleAddPost";
 import { FormikProps } from "formik";
 import { PostRequest } from "@/types/posts";
 
@@ -14,14 +13,16 @@ interface PostAddModalProps {
 export default function PostAddModal(props: PostAddModalProps) {
   const { toggleAddModalOpen, isAddModalOpen, formik } = props;
 
+  function openAddModal() {
+    toggleAddModalOpen();
+    formik.resetForm();
+  }
+
   return (
     <>
       <ModalContainer
         isOpen={isAddModalOpen}
-        toggleOpen={() => {
-          toggleAddModalOpen();
-          formik.resetForm();
-        }}
+        toggleOpen={openAddModal}
         title={"Add Post :"}
       >
         <form onSubmit={formik.handleSubmit}>
@@ -53,10 +54,7 @@ export default function PostAddModal(props: PostAddModalProps) {
             <Button
               variant="outlined"
               disabled={formik.isSubmitting}
-              onClick={() => {
-                toggleAddModalOpen();
-                formik.resetForm();
-              }}
+              onClick={openAddModal}
             >
               Cancel
             </Button>
