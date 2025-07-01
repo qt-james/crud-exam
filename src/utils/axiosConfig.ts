@@ -26,7 +26,9 @@ axiosConfig.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 403) {
-      console.warn("Unauthorized. Redirecting to login...");
+      setTimeout(() => {
+        window.location.href = "/SessionExpire";
+      }, 1000);
     }
     return Promise.reject(error);
   }
