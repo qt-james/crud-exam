@@ -57,9 +57,6 @@ export default function PostsTableBody(props: PostsTableProps) {
               }}
             >
               <Stack direction="row" spacing={1}>
-                <IconButton>
-                  <VisibilityIcon sx={{ fill: "orange" }} />
-                </IconButton>
                 <IconButton
                   onClick={() => {
                     openEditModal(item.postId, {
