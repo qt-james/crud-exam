@@ -4,8 +4,7 @@ import { SESSION_COOKIE } from "@/configs/constants";
 import { authLogin, authSignup } from "@/api/auth";
 import { useRouter } from "next/router";
 import { LoginRequest, SignupRequest } from "@/types/auth";
-import { useAlert } from "@/context/AlertProvider";
-import { isAxiosError } from "axios";
+import { useAlert } from "./AlertProvider";
 
 interface AuthContextType {
   isAuth: boolean;
@@ -35,13 +34,14 @@ export function AuthProvider(props: AuthContextProps) {
       const response = await authLogin(formData);
       cookies.set(SESSION_COOKIE, response.data.token);
       setIsAuth(true);
-    } catch (error: unknown) {
-      if (isAxiosError(error) && error.response?.status === 401) {
-        showAlert("Incorrect Password or Email!", "error");
-        return;
-      }
-    }
 
+      if (response) {
+        showAlert("Logged in successfully!", "success");
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert("Unauthorized!", "error");
+    }
     setIsLoading(false);
   }
 
@@ -51,11 +51,14 @@ export function AuthProvider(props: AuthContextProps) {
 
       const response = await authSignup(formData);
 
-      console.log(response.message);
+      if (response) {
+        showAlert("Signed up successfully!", "success");
+      }
 
       router.push("/login");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      showAlert("Signup Failed!", "error");
     }
     setIsLoading(false);
   }
