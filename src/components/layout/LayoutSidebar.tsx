@@ -1,5 +1,5 @@
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Button, Box, Drawer } from "@mui/material";
+import { Button, Box, Drawer, Typography, Avatar } from "@mui/material";
 import { useAuth } from "@/context/AuthProvider";
 import { JSX } from "react";
 
@@ -32,6 +32,41 @@ export default function LayoutSidebar(props: LayoutSidebar) {
         },
       }}
     >
+      <Typography
+        variant="h6"
+        sx={{
+          fontWeight: 700,
+          color: "white",
+          mb: 2,
+        }}
+      >
+        <Box component="span" sx={{ borderLeft: "4px solid #f1c40f", pl: 1, margin: 1 }}>
+          CRUD EXAM
+        </Box>
+      </Typography>
+
+      {/* Profile */}
+      <Box
+        sx={{
+          textAlign: "center",
+          my: 3,
+          background: "white",
+          padding: "10px",
+          margin: "0 10px 40px",
+          borderRadius: 2,
+        }}
+      >
+        <Avatar
+          src="https://i.pinimg.com/564x/1a/3d/9b/1a3d9b3b0ee022bc8c431c09dbf9bc34.jpg"
+          sx={{ width: 80, height: 80, mx: "auto" }}
+        />
+        <Typography fontWeight="bold" mt={1}>
+          YOUR NAME
+        </Typography>
+        <Typography color="orange" fontSize="0.9rem">
+          Admin
+        </Typography>
+      </Box>
       <Box
         sx={{
           height: "100vh",
