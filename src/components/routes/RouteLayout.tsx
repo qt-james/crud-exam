@@ -6,7 +6,7 @@ interface PropType {
   children: ReactNode;
 }
 
-const publicRoutes: string[] = ["/login", "/signup"];
+const publicRoutes: string[] = ["/login", "/signup", "/"];
 const privateRoutes: string[] = ["/dashboard", "/posts"];
 
 export default function RouteLayout({ children }: PropType) {
