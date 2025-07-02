@@ -67,6 +67,8 @@ export function AuthProvider(props: AuthContextProps) {
 
   function logout(): void {
     cookies.remove(SESSION_COOKIE);
+    cookies.remove("first-name");
+    cookies.remove("last-name");
     setIsAuth(false);
   }
 
