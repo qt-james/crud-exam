@@ -16,11 +16,13 @@ interface PostsTableProps {
   posts: PostData[];
   openEditModal: (id: string, item: PostRequest) => void;
   openDeleteModal: (id: string) => void;
+  openViewModal: (id: string) => void;
   isLoading: boolean;
 }
 
 export default function PostsTableBody(props: PostsTableProps) {
-  const { posts, openEditModal, openDeleteModal, isLoading } = props;
+  const { posts, openEditModal, openDeleteModal, openViewModal, isLoading } =
+    props;
 
   return (
     <TableBody>
@@ -57,6 +59,13 @@ export default function PostsTableBody(props: PostsTableProps) {
               }}
             >
               <Stack direction="row" spacing={1}>
+                <IconButton
+                  onClick={() => {
+                    openViewModal(item.postId);
+                  }}
+                >
+                  <VisibilityIcon sx={{ fill: "orange" }} />
+                </IconButton>
                 <IconButton
                   onClick={() => {
                     openEditModal(item.postId, {

@@ -34,6 +34,7 @@ export default function ModalContainer(props: ModalContainerProp) {
         <Typography
           sx={{
             marginBottom: 2,
+            fontWeight: 600
           }}
           id="modal-modal-title"
           variant="h5"

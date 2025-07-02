@@ -1,12 +1,14 @@
 import PostAddModal from "./modals/PostAddModal";
 import PostEditModal from "./modals/PostEditModal";
 import PostDeleteModal from "./modals/PostDeleteModal";
-import PostsTable from "./PostsTable";
-import PostPagination from "./PostsPagination";
+import PostViewModal from "./modals/PostViewModal";
 import useHandleAddPost from "./hooks/useHandleAddPost";
 import useHandleEditPost from "./hooks/useHandleEditPost";
 import useHandleDeletePost from "./hooks/useHandleDeletePost";
 import useHandleFetchPost from "./hooks/useHandleFetchPost";
+import useHandleViewPost from "./hooks/useHandleViewPost";
+import PostsTable from "./PostsTable";
+import PostPagination from "./PostsPagination";
 import { Container, Button, Box } from "@mui/material";
 
 export default function Posts() {
@@ -21,6 +23,7 @@ export default function Posts() {
   const addModalItems = useHandleAddPost(fetchAllPost);
   const editModalItems = useHandleEditPost(fetchAllPost);
   const deleteModalItems = useHandleDeletePost(fetchAllPost);
+  const viewModalItems = useHandleViewPost();
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: 2 }}>
@@ -44,11 +47,13 @@ export default function Posts() {
       <PostAddModal {...addModalItems} />
       <PostEditModal {...editModalItems} />
       <PostDeleteModal {...deleteModalItems} />
+      <PostViewModal {...viewModalItems} />
       <PostsTable
         isLoading={isLoading}
         posts={posts}
         openEditModal={editModalItems.toggleEditModalOpen}
         openDeleteModal={deleteModalItems.toggleDeleteModalOpen}
+        openViewModal={viewModalItems.toggleViewModalOpen}
       />
       <PostPagination
         currentPage={currentPage}

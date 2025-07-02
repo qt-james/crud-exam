@@ -7,13 +7,14 @@ interface PostTableProps {
   posts: PostData[];
   openEditModal: (id: string, item: PostRequest) => void;
   openDeleteModal: (id: string) => void;
+  openViewModal: (id: string) => void;
   isLoading: boolean;
 }
 
 const headerTitles = ["Title", "Message", "Date", "Actions"];
 
 export default function PostsTable(props: PostTableProps) {
-  const { openEditModal, openDeleteModal, posts, isLoading } = props;
+  const { openEditModal, openDeleteModal, openViewModal, posts, isLoading } = props;
 
   return (
     <TableContainer component={Paper} sx={{ height: 430}}>
@@ -24,6 +25,7 @@ export default function PostsTable(props: PostTableProps) {
           posts={posts}
           openEditModal={openEditModal}
           openDeleteModal={openDeleteModal}
+          openViewModal={openViewModal}
         />
       </Table>
     </TableContainer>
