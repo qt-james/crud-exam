@@ -25,7 +25,7 @@ export default function PostsTableBody(props: PostsTableProps) {
     props;
 
   return (
-    <TableBody>
+     <TableBody>
       {isLoading ? (
         <TableRow>
           <TableCell colSpan={4}>
@@ -34,6 +34,15 @@ export default function PostsTableBody(props: PostsTableProps) {
               <Skeleton height={40} animation="wave" />
               <Skeleton height={40} animation={false} />
             </Box>
+          </TableCell>
+        </TableRow>
+      ) : posts.length === 0 ? (
+        <TableRow>
+          <TableCell colSpan={4} sx={{
+            textAlign: "center",
+            fontWeight: 600
+          }}>
+            No posts available.
           </TableCell>
         </TableRow>
       ) : (
@@ -59,28 +68,20 @@ export default function PostsTableBody(props: PostsTableProps) {
               }}
             >
               <Stack direction="row" spacing={1}>
-                <IconButton
-                  onClick={() => {
-                    openViewModal(item.postId);
-                  }}
-                >
+                <IconButton onClick={() => openViewModal(item.postId)}>
                   <VisibilityIcon sx={{ fill: "orange" }} />
                 </IconButton>
                 <IconButton
-                  onClick={() => {
+                  onClick={() =>
                     openEditModal(item.postId, {
                       title: item.title,
                       message: item.message,
-                    });
-                  }}
+                    })
+                  }
                 >
                   <EditIcon sx={{ fill: "green" }} />
                 </IconButton>
-                <IconButton
-                  onClick={() => {
-                    openDeleteModal(item.postId);
-                  }}
-                >
+                <IconButton onClick={() => openDeleteModal(item.postId)}>
                   <DeleteIcon sx={{ fill: "red" }} />
                 </IconButton>
               </Stack>

@@ -9,6 +9,7 @@ import { useAlert } from "./AlertProvider";
 interface AuthContextType {
   isAuth: boolean;
   isLoading: boolean;
+  fullName: { firstName: string; lastName: string };
   login: (formData: LoginRequest) => Promise<void>;
   signup: (formData: SignupRequest) => Promise<void>;
   logout: () => void;
@@ -23,6 +24,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider(props: AuthContextProps) {
   const { children } = props;
   const [isAuth, setIsAuth] = useState<boolean>(!!cookies.get(SESSION_COOKIE));
+  const [fullName, setFullName] = useState({
+    firstName: "",
+    lastName: "",
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { showAlert } = useAlert();
@@ -33,7 +38,13 @@ export function AuthProvider(props: AuthContextProps) {
 
       const response = await authLogin(formData);
       cookies.set(SESSION_COOKIE, response.data.token);
+      cookies.set("first-name", response.data.firstName);
+      cookies.set("last-name", response.data.lastName);
       setIsAuth(true);
+      setFullName({
+        firstName: cookies.get("first-name"),
+        lastName: cookies.get("last-name"),
+      });
 
       if (response) {
         showAlert("Logged in successfully!", "success");
@@ -69,7 +80,9 @@ export function AuthProvider(props: AuthContextProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuth, isLoading, login, signup, logout }}>
+    <AuthContext.Provider
+      value={{ isAuth, isLoading, fullName, login, signup, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

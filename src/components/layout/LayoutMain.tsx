@@ -20,11 +20,10 @@ export default function PublicLayout(props: AuthLayoutProps) {
       sx={
         !isAuth
           ? {
-              minHeight: "100vh",
+              minHeight: "97vh",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              px: 2,
             }
           : {
               width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
@@ -46,9 +45,9 @@ export default function PublicLayout(props: AuthLayoutProps) {
             toggleDrawer={toggleDrawer}
             DrawerList={DrawerList}
           />
+          <Toolbar />
         </>
       )}
-      <Toolbar />
       {children}
     </Box>
   );

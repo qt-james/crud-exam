@@ -25,7 +25,7 @@ export default function ModalContainer(props: ModalContainerProp) {
           left: "50%",
           transform: "translate(-50%, -50%)",
           bgcolor: "background.paper",
-          width: "400px",
+          width: { xs: "70%", sm: 400 },
           boxShadow: 24,
           borderRadius: 2,
           p: 4,
@@ -34,7 +34,7 @@ export default function ModalContainer(props: ModalContainerProp) {
         <Typography
           sx={{
             marginBottom: 2,
-            fontWeight: 600
+            fontWeight: 600,
           }}
           id="modal-modal-title"
           variant="h5"

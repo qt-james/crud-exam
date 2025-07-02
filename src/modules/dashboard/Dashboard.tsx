@@ -1,5 +1,6 @@
 import { Box, Card, Typography } from "@mui/material";
-import CodeIcon from '@mui/icons-material/Code';
+import CodeIcon from "@mui/icons-material/Code";
+import cookies from "@/utils/cookies";
 
 export default function DashboardCard() {
   return (
@@ -20,7 +21,7 @@ export default function DashboardCard() {
           flexDirection: "column",
           alignItems: "left",
           gap: 2,
-          ml: 2
+          ml: 2,
         }}
       >
         <CodeIcon sx={{ fontSize: 40, color: "#2196f3" }} />
@@ -35,7 +36,7 @@ export default function DashboardCard() {
               mt: 1,
             }}
           >
-            Kirby Rivera
+            {cookies.get("first-name")} {cookies.get("last-name")}
           </Typography>
         </Box>
       </Box>

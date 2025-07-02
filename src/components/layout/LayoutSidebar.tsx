@@ -1,6 +1,7 @@
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button, Box, Drawer, Typography, Avatar } from "@mui/material";
 import { useAuth } from "@/context/AuthProvider";
+import cookies from "@/utils/cookies";
 import { JSX } from "react";
 
 interface LayoutSidebar {
@@ -40,7 +41,10 @@ export default function LayoutSidebar(props: LayoutSidebar) {
           mb: 2,
         }}
       >
-        <Box component="span" sx={{ borderLeft: "4px solid #f1c40f", pl: 1, margin: 1 }}>
+        <Box
+          component="span"
+          sx={{ borderLeft: "4px solid #f1c40f", pl: 1, margin: 1 }}
+        >
           CRUD EXAM
         </Box>
       </Typography>
@@ -61,7 +65,7 @@ export default function LayoutSidebar(props: LayoutSidebar) {
           sx={{ width: 80, height: 80, mx: "auto" }}
         />
         <Typography fontWeight="bold" mt={1}>
-          YOUR NAME
+          {cookies.get("first-name")}
         </Typography>
         <Typography color="orange" fontSize="0.9rem">
           Admin
