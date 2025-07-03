@@ -20,10 +20,11 @@ export default function PublicLayout(props: AuthLayoutProps) {
       sx={
         !isAuth
           ? {
-              minHeight: "97vh",
+              minHeight: "100vh",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              backgroundColor: "primary.main",
             }
           : {
               width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : "100%",

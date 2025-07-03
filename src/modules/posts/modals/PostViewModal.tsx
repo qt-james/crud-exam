@@ -1,6 +1,6 @@
 import { PostData } from "@/types/posts";
 import ModalContainer from "@/components/modal/ModalContainer";
-import { Button, Stack, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface PostViewModalProps {
   isViewModalOpen: { isOpen: boolean; id: string };
