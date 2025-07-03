@@ -7,7 +7,7 @@ export default function DashboardCard() {
     <Card
       sx={{
         maxWidth: "xl",
-        backgroundColor: "#f0f8ff",
+        backgroundColor: "#fdf0ff",
         padding: 3,
         borderRadius: 2,
         boxShadow: "none",
@@ -24,7 +24,7 @@ export default function DashboardCard() {
           ml: 2,
         }}
       >
-        <CodeIcon sx={{ fontSize: 40, color: "#2196f3" }} />
+        <CodeIcon sx={{ fontSize: 40, color: "#b421f3" }} />
         <Box>
           <Typography variant="h6" color="text.secondary">
             FrontEnd Developer

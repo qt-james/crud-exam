@@ -9,7 +9,9 @@ export default function PostsTableHeader(props: TableHeaderProp) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow sx={{
+        backgroundColor: "#fdf0ff"
+      }}>
         {headerTitle.map((item, index) => {
           return (
             <TableCell key={index}>

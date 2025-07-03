@@ -21,6 +21,7 @@ export default function ModalTextField(props: ModalTextFieldProps) {
         fullWidth
         id={field}
         name={field}
+        multiline
         type={"text"}
         label={label}
         value={value}

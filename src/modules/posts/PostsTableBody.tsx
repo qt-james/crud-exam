@@ -25,7 +25,7 @@ export default function PostsTableBody(props: PostsTableProps) {
     props;
 
   return (
-     <TableBody>
+    <TableBody>
       {isLoading ? (
         <TableRow>
           <TableCell colSpan={4}>
@@ -38,10 +38,13 @@ export default function PostsTableBody(props: PostsTableProps) {
         </TableRow>
       ) : posts.length === 0 ? (
         <TableRow>
-          <TableCell colSpan={4} sx={{
-            textAlign: "center",
-            fontWeight: 600
-          }}>
+          <TableCell
+            colSpan={4}
+            sx={{
+              textAlign: "center",
+              fontWeight: 600,
+            }}
+          >
             No posts available.
           </TableCell>
         </TableRow>
@@ -49,7 +52,13 @@ export default function PostsTableBody(props: PostsTableProps) {
         posts.map((item: PostData, index: number) => (
           <TableRow key={index}>
             <TableCell>{item.title}</TableCell>
-            <TableCell>{item.message}</TableCell>
+            <TableCell
+              sx={{
+                maxWidth: 189,
+              }}
+            >
+              {item.message}
+            </TableCell>
             <TableCell>
               {new Date(item.updatedAt).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -67,7 +76,7 @@ export default function PostsTableBody(props: PostsTableProps) {
                 textAlign: "center",
               }}
             >
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row">
                 <IconButton onClick={() => openViewModal(item.postId)}>
                   <VisibilityIcon sx={{ fill: "orange" }} />
                 </IconButton>
