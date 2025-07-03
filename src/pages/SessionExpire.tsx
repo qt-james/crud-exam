@@ -8,20 +8,22 @@ import {
   Button,
 } from "@mui/material";
 import { useAuth } from "@/context/AuthProvider";
-import cookies from "@/utils/cookies";
 import { useRouter } from "next/router";
 
 export default function Testing() {
-  const { logout } = useAuth();
-  const auth = cookies.get("SESSION_COOKIE");
+  const { logout, isAuth } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth) {
+    if (isAuth) {
       setOpen(true);
     }
-  }, [auth]);
+
+    if (!isAuth) {
+      router.push("/");
+    }
+  }, [isAuth]);
 
   const handleClose = () => {
     setOpen(false);
