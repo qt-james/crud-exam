@@ -19,6 +19,11 @@ export const SignupSchema = Yup.object().shape({
 });
 
 export const FormSchema = Yup.object().shape({
-  title: Yup.string().required("First name is required"),
-  message: Yup.string().required("Last name is required"),
+  title: Yup.string().required("TItle is required"),
+  message: Yup.string().required("Message is required"),
+});
+
+export const EditProfileSchema = Yup.object().shape({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
 });
