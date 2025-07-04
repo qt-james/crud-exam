@@ -8,5 +8,5 @@ export function userEditProfile(formData: EditUserRequest): Promise<LoginRespons
 }
 
 export function userChangePassword(formData: ChangePasswordRequest): Promise<CommonResponse> {
-  return fetcher("POST", "/user/signup", formData);
+  return fetcher("POST", "/user/password", formData);
 }

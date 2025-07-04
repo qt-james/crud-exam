@@ -27,7 +27,7 @@ axiosConfig.interceptors.response.use(
   (error) => {
     if (error.response?.status === 403) {
       setTimeout(() => {
-        window.location.href = "/SessionExpire";
+        window.location.replace("/SessionExpire");
       }, 1000);
     }
     return Promise.reject(error);

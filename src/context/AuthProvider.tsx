@@ -32,7 +32,10 @@ export function AuthProvider(props: AuthContextProps) {
       setIsLoading(true);
 
       const response = await authLogin(formData);
-      cookies.set(SESSION_COOKIE, response.data.token);
+      cookies.set(SESSION_COOKIE, response.data.token, {
+        path: "/",
+        maxAge: 7200,
+      });
       cookies.set("first-name", response.data.firstName);
       cookies.set("last-name", response.data.lastName);
       setIsAuth(true);
