@@ -22,6 +22,7 @@ export default function useHandleFetchPost() {
   const { limit } = router.query;
 
   const parsedLimit = parseInt(limit as string) || 5;
+  const totalPages = metaDatas?.totalPages || 1;
 
   async function fetchAllPost(params?: FetchPostParams): Promise<void> {
     try {
@@ -45,8 +46,6 @@ export default function useHandleFetchPost() {
   }
 
   async function handlePagination(newPage: number) {
-    const totalPages = metaDatas?.totalPages || 1;
-
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
 
