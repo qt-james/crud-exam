@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { getPosts } from "@/api/posts";
 import { PostData, PostMeta } from "@/types/posts";
 import { useAlert } from "@/context/AlertProvider";
@@ -8,7 +9,6 @@ type FetchPostParams = {
   limit?: string;
   offset?: string | number;
   order?: string;
-  newPage?: number;
 };
 
 export default function useHandleFetchPost() {
@@ -16,16 +16,19 @@ export default function useHandleFetchPost() {
   const [metaDatas, setMetaDatas] = useState<PostMeta>({} as PostMeta);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = metaDatas?.totalPages;
-  const limit = metaDatas?.limit;
+
   const { showAlert } = useAlert();
+  const router = useRouter();
+  const { limit } = router.query;
+
+  const parsedLimit = parseInt(limit as string) || 5;
 
   async function fetchAllPost(params?: FetchPostParams): Promise<void> {
     try {
       setIsLoading(true);
 
       const response = await getPosts({
-        limit: params?.limit ?? "5",
+        limit: params?.limit ?? parsedLimit.toString(),
         offset: params?.offset ?? 0,
         order: params?.order ?? "DESC",
       });
@@ -35,34 +38,58 @@ export default function useHandleFetchPost() {
     } catch (error: unknown) {
       if (isAxiosError(error) && error.response?.status === 403) {
         showAlert("Session Expired!", "error");
-        return;
       }
-      return;
     } finally {
       setIsLoading(false);
     }
   }
 
   async function handlePagination(newPage: number) {
+    const totalPages = metaDatas?.totalPages || 1;
+
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
 
       const offset = newPage - 1;
 
-      fetchAllPost({ limit: limit, offset: offset, order: "DESC" });
+      router.push(
+        {
+          pathname: "/posts",
+          query: {
+            ...router.query,
+            page: newPage,
+            limit: parsedLimit,
+            offset: offset,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
+
+      fetchAllPost({
+        limit: parsedLimit.toString(),
+        offset: offset,
+        order: "DESC",
+      });
     }
   }
 
   useEffect(() => {
-    fetchAllPost();
-  }, []);
+    if (!router.isReady) return;
+
+    const pageFromUrl = parseInt(router.query.page as string) || 1;
+    const offset = pageFromUrl - 1;
+
+    setCurrentPage(pageFromUrl);
+    fetchAllPost({ limit: parsedLimit.toString(), offset, order: "DESC" });
+  }, [router.isReady, router.query.page, limit]);
 
   return {
     fetchAllPost,
     posts,
     isLoading,
     currentPage,
-    totalPages,
+    totalPages: metaDatas?.totalPages ?? 1,
     handlePagination,
   };
 }
